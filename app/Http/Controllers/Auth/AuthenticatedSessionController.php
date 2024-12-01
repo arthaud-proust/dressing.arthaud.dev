@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use function config;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -21,6 +22,11 @@ class AuthenticatedSessionController extends Controller
         return Inertia::render('Auth/Login', [
             'canResetPassword' => Route::has('password.request'),
             'status' => session('status'),
+            'prefilledCredentials' => app()->environment('local', 'staging') ? [
+                'email' => config('app.test_user.email'),
+                'password' => config('app.test_user.password'),
+                'remember' => 'true',
+            ] : null,
         ]);
     }
 

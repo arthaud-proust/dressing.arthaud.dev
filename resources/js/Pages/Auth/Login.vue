@@ -1,22 +1,29 @@
 <script setup lang="ts">
 import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 
-defineProps<{
+const props = defineProps<{
     canResetPassword?: boolean;
     status?: string;
+    prefilledCredentials: {
+        email: string;
+        password: string;
+        remember: boolean;
+    } | null;
 }>();
 
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false,
-});
+const form = useForm(
+    props.prefilledCredentials ?? {
+        email: '',
+        password: '',
+        remember: false,
+    },
+);
 
 const submit = () => {
     form.post(route('login'), {
@@ -70,9 +77,7 @@ const submit = () => {
             <div class="mt-4 block">
                 <label class="flex items-center">
                     <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
+                    <span class="ms-2 text-sm text-gray-600">Remember me</span>
                 </label>
             </div>
 
