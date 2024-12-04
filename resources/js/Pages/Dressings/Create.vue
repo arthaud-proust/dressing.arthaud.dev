@@ -15,24 +15,24 @@ const submit = () => {
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head :title="$t('dashboard')" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Créer un dressing
+                {{ $t('crer_un_dressing') }}
             </h2>
         </template>
 
         <form class="mt-auto flex flex-col gap-4" @submit.prevent="submit">
             <div>
-                <label>Nom</label>
+                <label>{{ $t('nom') }}</label>
                 <VInput v-model="form.name" class="w-full" />
 
                 <InputError :message="form.errors.name" class="mt-2" />
             </div>
 
-            <VButton type="submit">Créer le dressing</VButton>
+            <VButton type="submit">{{ $t('crer_le_dressing') }}</VButton>
         </form>
     </AuthenticatedLayout>
 </template>

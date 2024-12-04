@@ -13,12 +13,12 @@ defineProps<{
 </script>
 
 <template>
-    <Head title="Profile" />
+    <Head :title="$t('profil')" />
 
     <AuthenticatedLayout>
         <template #header>
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                Profil
+                {{ $t('profil') }}
             </h2>
         </template>
 
@@ -40,7 +40,7 @@ defineProps<{
                     <section class="space-y-6">
                         <header>
                             <h2 class="text-lg font-medium text-gray-900">
-                                Log out
+                                {{ $t('se_dconnecter') }}
                             </h2>
                         </header>
 
@@ -49,7 +49,7 @@ defineProps<{
                             method="post"
                             as="button"
                             variant="danger"
-                            >Log out
+                            >{{ $t('se_dconnecter') }}
                         </VButton>
                     </section>
                 </div>

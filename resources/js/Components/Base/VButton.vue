@@ -4,8 +4,8 @@
         :type="href ? undefined : type"
         :disabled="disabled"
         :href="disabled ? undefined : href"
-        class="flex items-center justify-center gap-1 rounded-lg px-4 py-2 font-bold ring-offset-2 focus:outline-none focus:ring-4 disabled:pointer-events-none disabled:opacity-50"
-        :class="classes"
+        class="flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none focus:ring-4 disabled:pointer-events-none disabled:opacity-50"
+        :class="[colorClasses, shapeClasses]"
     >
         <slot />
     </component>
@@ -21,6 +21,7 @@ const props = withDefaults(
         variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success';
         disabled?: boolean;
         external?: boolean;
+        icon?: boolean;
     }>(),
     {
         type: 'button',
@@ -28,13 +29,16 @@ const props = withDefaults(
     },
 );
 
-const classes = computed(() => {
+const shapeClasses = computed(() => {
+    return props.icon ? 'p-3 rounded-full' : 'rounded-lg px-4 py-2 ';
+});
+const colorClasses = computed(() => {
     if (props.variant === 'primary') {
         return 'bg-amber-500 ring-amber-700 hover:bg-amber-600 text-amber-50';
     }
 
     if (props.variant === 'secondary') {
-        return 'bg-amber-50 ring-amber-700 hover:bg-amber-100 text-amber-800';
+        return 'bg-amber-100/80 ring-amber-700 hover:bg-amber-100 text-amber-800';
     }
 
     if (props.variant === 'tertiary') {

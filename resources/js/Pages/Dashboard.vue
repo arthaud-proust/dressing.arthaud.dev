@@ -10,25 +10,28 @@ const props = defineProps<{
 </script>
 
 <template>
-    <Head title="Dashboard" />
+    <Head :title="$t('dashboard')" />
 
     <AuthenticatedLayout>
         <template #header>
             <div class="flex items-center justify-between">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                    Dressings
+                    {{ $t('dressings') }}
                 </h2>
-                <VButton :href="route('dressings.create')">Créer</VButton>
+                <VButton :href="route('dressings.create')"
+                    >{{ $t('creer') }}
+                </VButton>
             </div>
         </template>
 
         <div class="mt-auto flex flex-col justify-end gap-2">
             <Link
                 v-for="dressing in dressings"
-                class="rounded-xl bg-amber-100 p-4"
+                class="flex flex-col rounded-xl bg-amber-100 p-4"
                 :href="route('dressings.show', { dressing })"
             >
-                {{ dressing.name }}
+                <span>{{ $t('dressing') }}</span>
+                <span class="text-2xl">{{ dressing.name }}</span>
             </Link>
         </div>
     </AuthenticatedLayout>

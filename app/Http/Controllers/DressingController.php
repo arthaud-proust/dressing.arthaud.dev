@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Dtos\ClothingDto;
 use App\Dtos\DressingDto;
 use App\Http\Requests\StoreDressingRequest;
 use App\Http\Requests\UpdateDressingRequest;
@@ -32,6 +33,7 @@ class DressingController extends Controller
 
         return Inertia::render('Dressings/Show', [
             'dressing' => DressingDto::from($dressing),
+            'clothingListByCategory' => ClothingDto::collect($dressing->clothing)->groupBy('category'),
         ]);
     }
 

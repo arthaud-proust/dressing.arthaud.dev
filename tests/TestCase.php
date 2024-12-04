@@ -19,9 +19,9 @@ abstract class TestCase extends BaseTestCase
         Storage::fake('local');
     }
 
-    public function uploadedTextFile(): UploadedFile
+    public function uploadedImageFile(): UploadedFile
     {
-        $baseFile = new File(storage_path('app/stubs/text.txt'));
+        $baseFile = new File(storage_path('app/stubs/image.jpeg'));
 
         $path = Storage::putFile('/', $baseFile);
 
