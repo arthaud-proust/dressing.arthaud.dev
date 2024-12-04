@@ -20,7 +20,7 @@ const submit = () => {
 </script>
 
 <template>
-    <Head :title="t('dashboard')" />
+    <Head :title="$t('dashboard')" />
 
     <AuthenticatedLayout>
         <template #header>
