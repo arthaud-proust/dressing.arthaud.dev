@@ -8,6 +8,10 @@ import { createApp, DefineComponent, h } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
+import { register as registerSwiper } from 'swiper/element/bundle';
+
+registerSwiper();
+
 type MessageSchema = (typeof messages)['fr'];
 
 const locale = () =>

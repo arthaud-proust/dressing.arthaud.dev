@@ -72,5 +72,8 @@
     "prendre_des_photos": "Prendre des photos",
     "prendre_dautres_photos": "Prendre d'autres photos",
     "aucune_description": "Aucune description",
-    "dressing": "Dressing"
+    "dressing": "Dressing",
+    "vetements": "{n} vêtement | {n} vêtements",
+    "detail_du_vetement": "Détail du vêtement",
+    "voir_le_dtail": "Voir le détail"
 }

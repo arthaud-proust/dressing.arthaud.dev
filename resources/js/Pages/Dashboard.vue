@@ -30,8 +30,11 @@ const props = defineProps<{
                 class="flex flex-col rounded-xl bg-amber-100 p-4"
                 :href="route('dressings.show', { dressing })"
             >
-                <span>{{ $t('dressing') }}</span>
-                <span class="text-2xl">{{ dressing.name }}</span>
+                <span class="text-amber-950">{{ $t('dressing') }}</span>
+                <span class="text-2xl text-amber-800">{{ dressing.name }}</span>
+                <span class="text-amber-950">{{
+                    $t('vetements', dressing.clothingCount)
+                }}</span>
             </Link>
         </div>
     </AuthenticatedLayout>
