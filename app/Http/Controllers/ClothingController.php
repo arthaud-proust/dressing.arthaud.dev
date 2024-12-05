@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Dtos\DressingDto;
 use App\Enums\ClothingCategory;
-use App\Http\Requests\StoreClothingRequest;
-use App\Http\Requests\UpdateClothingRequest;
+use App\Http\Requests\Clothing\StoreClothingRequest;
+use App\Http\Requests\Clothing\UpdateClothingRequest;
 use App\Models\Clothing;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;

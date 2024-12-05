@@ -9,6 +9,7 @@ import {
 } from '@headlessui/vue';
 
 import VButton from '@/Components/Base/VButton.vue';
+import VTag from '@/Components/Base/VTag.vue';
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/solid';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -29,7 +30,7 @@ const pagination = {
 </script>
 <template>
     <TransitionRoot appear show as="template">
-        <Dialog as="div" @close="emit('close')" class="relative z-10">
+        <Dialog as="div" @close="emit('close')" class="relative z-50">
             <TransitionChild
                 as="template"
                 enter="duration-300 ease-out"
@@ -71,7 +72,7 @@ const pagination = {
                                     <img
                                         :src="imageUrl"
                                         alt=""
-                                        class="rounded-lg md:rounded-xl"
+                                        class="mx-auto rounded-lg md:rounded-xl"
                                     />
                                 </SwiperSlide>
                             </Swiper>
@@ -91,13 +92,11 @@ const pagination = {
                                 {{ $t('detail_du_vetement') }}
                             </DialogTitle>
 
-                            <p
-                                class="mt-2 inline-flex rounded-lg bg-neutral-100 px-3 py-1"
-                            >
+                            <VTag class="mt-2">
                                 {{
                                     $t(`clothing_category.${clothing.category}`)
                                 }}
-                            </p>
+                            </VTag>
 
                             <p
                                 class="mt-2 text-neutral-500"

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Feature\Dressing;
 
 use App\Models\Dressing;
 use App\Models\User;

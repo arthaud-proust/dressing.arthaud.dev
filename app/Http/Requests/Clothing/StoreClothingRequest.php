@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Clothing;
 
 use App\Enums\ClothingCategory;
 use Illuminate\Foundation\Http\FormRequest;

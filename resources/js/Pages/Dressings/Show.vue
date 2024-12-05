@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
+import VStrechedButton from '@/Components/Base/VStrechedButton.vue';
+import ClothingCard from '@/Components/Clothing/ClothingCard.vue';
 import ClothingDetails from '@/Components/Clothing/ClothingDetails.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ClothingCategory, ClothingDto, DressingDto } from '@/types/generated';
-import { QuestionMarkCircleIcon } from '@heroicons/vue/24/solid';
 import { Head } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -52,47 +53,13 @@ const selectedClothing = ref<ClothingDto | null>(null);
                 }})
             </h3>
             <div class="mt-2 flex items-start gap-2 overflow-y-auto pb-4 pr-8">
-                <article
-                    class="relative w-32 shrink-0 overflow-hidden rounded-lg bg-neutral-50"
+                <VStrechedButton
                     v-for="clothing in clothingList"
+                    :sr-text="$t('voir_le_dtail')"
+                    @click="selectedClothing = clothing"
                 >
-                    <div class="flex gap-1">
-                        <img
-                            v-for="imageUrl in clothing.imageUrls"
-                            :src="imageUrl"
-                            alt=""
-                            class="rounded-md"
-                        />
-                        <div
-                            v-if="clothing.imageUrls.length === 0"
-                            class="w-full rounded-md bg-neutral-100 p-6"
-                        >
-                            <QuestionMarkCircleIcon
-                                class="mx-auto size-12 text-neutral-200"
-                            />
-                        </div>
-                    </div>
-
-                    <p
-                        class="p-2 text-center text-xs text-neutral-500"
-                        v-if="
-                            clothing.description ||
-                            clothing.imageUrls.length === 0
-                        "
-                    >
-                        {{ clothing.description }}
-                        <template v-if="clothing.imageUrls.length === 0">
-                            {{ $t('aucune_description') }}
-                        </template>
-                    </p>
-
-                    <button
-                        @click="selectedClothing = clothing"
-                        class="absolute inset-0"
-                    >
-                        <span class="sr-only">{{ $t('voir_le_dtail') }}</span>
-                    </button>
-                </article>
+                    <ClothingCard :clothing="clothing" />
+                </VStrechedButton>
             </div>
         </section>
         <ClothingDetails

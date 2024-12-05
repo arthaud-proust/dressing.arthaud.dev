@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
+import VStrechedButton from '@/Components/Base/VStrechedButton.vue';
+import DressingCard from '@/Components/Dressing/DressingCard.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
-import { Head, Link } from '@inertiajs/vue3';
+import { Head } from '@inertiajs/vue3';
 
 const props = defineProps<{
     dressings: Array<DressingDto>;
@@ -25,17 +27,13 @@ const props = defineProps<{
         </template>
 
         <div class="mt-auto flex flex-col justify-end gap-2">
-            <Link
+            <VStrechedButton
                 v-for="dressing in dressings"
-                class="flex flex-col rounded-xl bg-amber-100 p-4"
+                :sr-text="dressing.name"
                 :href="route('dressings.show', { dressing })"
             >
-                <span class="text-amber-950">{{ $t('dressing') }}</span>
-                <span class="text-2xl text-amber-800">{{ dressing.name }}</span>
-                <span class="text-amber-950">{{
-                    $t('vetements', dressing.clothingCount)
-                }}</span>
-            </Link>
+                <DressingCard :dressing="dressing" />
+            </VStrechedButton>
         </div>
     </AuthenticatedLayout>
 </template>

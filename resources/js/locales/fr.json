@@ -76,5 +76,7 @@
     "vetements": "{n} vêtement | {n} vêtements",
     "detail_du_vetement": "Détail du vêtement",
     "voir_le_dtail": "Voir le détail",
-    "fermer": "Fermer"
+    "fermer": "Fermer",
+    "dplacer_des_vtements": "Déplacer des vêtements",
+    "dplacer_n_vtements": "Déplacer {n} vêtement | Déplacer {n} vêtements"
 }
