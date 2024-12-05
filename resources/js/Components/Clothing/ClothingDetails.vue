@@ -8,6 +8,7 @@ import {
     TransitionRoot,
 } from '@headlessui/vue';
 
+import VButton from '@/Components/Base/VButton.vue';
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/solid';
 import 'swiper/css';
 import 'swiper/css/pagination';
@@ -24,9 +25,6 @@ const emit = defineEmits<{
 
 const pagination = {
     clickable: true,
-    // renderBullet: function (index: number, className: string) {
-    //     return `<span class="${className} w-4 h-1"></span>`;
-    // },
 };
 </script>
 <template>
@@ -58,7 +56,7 @@ const pagination = {
                         leave-to="opacity-0 scale-95"
                     >
                         <DialogPanel
-                            class="w-full max-w-2xl transform flex-col items-start overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all md:rounded-3xl md:p-6"
+                            class="relative w-full max-w-2xl transform flex-col items-start overflow-hidden rounded-2xl bg-white p-4 text-left align-middle shadow-xl transition-all md:rounded-3xl md:p-6"
                         >
                             <Swiper
                                 v-if="clothing.imageUrls.length > 0"
@@ -115,6 +113,14 @@ const pagination = {
                                     {{ $t('aucune_description') }}
                                 </template>
                             </p>
+
+                            <VButton
+                                @click="emit('close')"
+                                variant="tertiary"
+                                class="mt-2 w-full"
+                            >
+                                {{ $t('fermer') }}
+                            </VButton>
                         </DialogPanel>
                     </TransitionChild>
                 </div>

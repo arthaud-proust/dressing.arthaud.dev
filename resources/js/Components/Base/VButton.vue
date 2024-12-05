@@ -4,7 +4,7 @@
         :type="href ? undefined : type"
         :disabled="disabled"
         :href="disabled ? undefined : href"
-        class="flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none focus:ring-4 disabled:pointer-events-none disabled:opacity-50"
+        class="flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50 md:focus:ring-4"
         :class="[colorClasses, shapeClasses]"
     >
         <slot />
@@ -22,6 +22,7 @@ const props = withDefaults(
         disabled?: boolean;
         external?: boolean;
         icon?: boolean;
+        small?: boolean;
     }>(),
     {
         type: 'button',
@@ -30,7 +31,10 @@ const props = withDefaults(
 );
 
 const shapeClasses = computed(() => {
-    return props.icon ? 'p-3 rounded-full' : 'rounded-lg px-4 py-2 ';
+    if (props.icon) {
+        return props.small ? 'p-2 rounded-full' : 'p-3 rounded-full';
+    }
+    return 'rounded-lg px-4 py-2 ';
 });
 const colorClasses = computed(() => {
     if (props.variant === 'primary') {
@@ -42,7 +46,7 @@ const colorClasses = computed(() => {
     }
 
     if (props.variant === 'tertiary') {
-        return 'bg-neutral-50 ring-neutral-700 hover:bg-neutral-100 text-neutral-800';
+        return 'bg-neutral-100 ring-neutral-400 hover:bg-neutral-200 text-neutral-800';
     }
 
     if (props.variant === 'danger') {
