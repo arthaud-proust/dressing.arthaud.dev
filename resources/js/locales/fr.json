@@ -78,5 +78,9 @@
     "voir_le_dtail": "Voir le détail",
     "fermer": "Fermer",
     "dplacer_des_vtements": "Déplacer des vêtements",
-    "dplacer_n_vtements": "Déplacer {n} vêtement | Déplacer {n} vêtements"
+    "dplacer_n_vtements": "Déplacer {n} vêtement | Déplacer {n} vêtements",
+    "etape_n_sur_total": "Étape {n}/{total}",
+    "slectionner_les_vtements": "Sélectionner les vêtements",
+    "dressing_dorigine": "Dressing d'origine",
+    "dressing_de_destination": "Dressing de destination"
 }

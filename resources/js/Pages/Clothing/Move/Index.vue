@@ -12,6 +12,10 @@ const props = defineProps<{
     dressings: Array<DressingDto>;
 }>();
 
+const originDressings = computed(() =>
+    props.dressings.filter((dressing) => dressing.clothesCount > 0),
+);
+
 const destinationDressings = computed(() =>
     props.dressings.filter(
         (dressing) => dressing.id !== originDressing.value?.id,
@@ -42,22 +46,30 @@ const selectDestination = (dressing: DressingDto) => {
             <h2 class="mt-2 text-xl font-semibold leading-tight text-gray-800">
                 {{ $t('dplacer_des_vtements') }}
             </h2>
-            <div class="mt-2 flex items-center gap-2">
-                <VTag>{{ originDressing?.name ?? '?' }}</VTag>
 
-                <ArrowRightIcon class="size-5" />
+            <VStretchedButton
+                @click="originDressing = null"
+                sr-text="Modifier l'origine ou la destination"
+            >
+                <div class="mt-2 flex items-center gap-2">
+                    <VTag>{{ originDressing?.name ?? '?' }} </VTag>
 
-                <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
-            </div>
+                    <ArrowRightIcon class="size-5" />
+
+                    <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
+                </div>
+            </VStretchedButton>
         </template>
 
         <template v-if="!originDressing">
-            <p class="mt-auto text-sm text-neutral-500">Étape 1/3</p>
-            <h3 class="text-xl">Dressing d'origine</h3>
+            <p class="mt-auto text-sm text-neutral-500">
+                {{ $t('etape_n_sur_total', { n: 1, total: 3 }) }}
+            </p>
+            <h3 class="text-xl">{{ $t('dressing_dorigine') }}</h3>
 
             <div class="mt-4 flex flex-col justify-end gap-2">
                 <VStretchedButton
-                    v-for="dressing in dressings"
+                    v-for="dressing in originDressings"
                     :sr-text="dressing.name"
                     @click="selectOrigin(dressing)"
                 >
@@ -66,8 +78,10 @@ const selectDestination = (dressing: DressingDto) => {
             </div>
         </template>
         <template v-else>
-            <p class="mt-auto text-sm text-neutral-500">Étape 2/3</p>
-            <h3 class="text-xl">Dressing de destination</h3>
+            <p class="mt-auto text-sm text-neutral-500">
+                {{ $t('etape_n_sur_total', { n: 2, total: 3 }) }}
+            </p>
+            <h3 class="text-xl">{{ $t('dressing_de_destination') }}</h3>
 
             <div class="mt-4 flex flex-col justify-end gap-2">
                 <VStretchedButton

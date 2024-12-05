@@ -48,21 +48,32 @@ const send = () => {
                 {{ $t('dplacer_des_vtements') }}
             </h2>
 
-            <div class="mt-2 flex items-center gap-2">
-                <VTag>{{ originDressing?.name ?? '?' }}</VTag>
+            <VStretchedButton
+                :href="route('clothes.move.index')"
+                sr-text="Modifier l'origine ou la destination"
+            >
+                <div class="mt-2 flex items-center gap-2">
+                    <VTag>{{ originDressing?.name ?? '?' }}</VTag>
 
-                <ArrowRightIcon class="size-5" />
+                    <ArrowRightIcon class="size-5" />
 
-                <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
-            </div>
+                    <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
+                </div>
+            </VStretchedButton>
 
-            <VButton class="mt-2" @click="send">
+            <VButton
+                class="mt-2"
+                @click="send"
+                :disabled="selectedClothesId.size === 0"
+            >
                 {{ $t('dplacer_n_vtements', selectedClothesId.size) }}
             </VButton>
         </template>
 
-        <p class="text-sm text-neutral-500">Étape 3/3</p>
-        <h3 class="text-xl">Sélectionner les vêtements</h3>
+        <p class="text-sm text-neutral-500">
+            {{ $t('etape_n_sur_total', { n: 3, total: 3 }) }}
+        </p>
+        <h3 class="text-xl">{{ $t('slectionner_les_vtements') }}</h3>
 
         <section
             class="mt-4"
