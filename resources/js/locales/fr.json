@@ -25,7 +25,7 @@
     "confirmer": "Confirmer",
     "il_sagit_dune_zone_scurise_de_lapplication_veuille": "Il s'agit d'une zone sécurisée de l'application. Veuillez confirmer votre mot de passe avant de continuer.",
     "mot_de_passe_oubli": "Mot de passe oublié",
-    "vous_avez_oubli_votre_mot_de_passe_pas_de_problme": "Vous avez oublié votre mot de passe ? Pas de problème. Indiquez-nous votre adresse électronique et nous vous enverrons un lien de réinitialisation du mot de passe. et nous vous enverrons un lien de réinitialisation du mot de passe qui vous permettra d'en choisir un nouveau. de choisir un nouveau mot de passe.",
+    "vous_avez_oubli_votre_mot_de_passe_pas_de_problme": "Vous avez oublié votre mot de passe ? Pas de problème. Indiquez-nous votre adresse électronique et nous vous enverrons un lien de réinitialisation du mot de passe.",
     "envoyer_le_lien_de_rinitialisation": "Envoyer le lien de réinitialisation",
     "se_connecter": "Se connecter",
     "se_souvenir_de_moi": "Se souvenir de moi",
@@ -33,7 +33,7 @@
     "s_inscrire": "S'inscrire",
     "rinitialiser_le_mot_de_passe": "Réinitialiser le mot de passe",
     "vrification_de_lemail": "Vérification de l'email",
-    "merci_de_vous_tre_inscrit_avant_de_commencer_pourr": "Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse électronique en cliquant sur le lien que nous venons de vous envoyer par courrier électronique ? Si vous n'avez pas Si vous n'avez pas reçu l'e-mail, nous vous en enverrons un autre avec plaisir.",
+    "merci_de_vous_tre_inscrit_avant_de_commencer_pourr": "Merci de vous être inscrit ! Avant de commencer, pourriez-vous vérifier votre adresse électronique en cliquant sur le lien que nous venons de vous envoyer par courrier électronique ? Si vous n'avez pas reçu l'e-mail, nous vous en enverrons un autre avec plaisir.",
     "un_nouveau_lien_de_vrification_a_t_envoy_ladresse": "Un nouveau lien de vérification a été envoyé à l'adresse électronique que vous avez fournie lors de l'inscription.",
     "renvoyer_lemail_de_vrification": "Renvoyer l'e-mail de vérification",
     "se_dconnecter": "Se déconnecter",
@@ -53,7 +53,7 @@
     "une_fois_votre_compte_supprim_toutes_ses_ressource": "Une fois votre compte supprimé, toutes ses ressources et données seront seront définitivement supprimées. Avant de supprimer votre compte, veuillez télécharger toutes les données ou informations que vous souhaitez conserver.",
     "supprimer_le_compte": "Supprimer le compte",
     "tesvous_sr_de_vouloir_supprimer_votre_compte": "Êtes-vous sûr de vouloir supprimer votre compte ?",
-    "une_fois_que_votre_compte_est_supprim_toutes_ses_r": "Une fois que votre compte est supprimé, toutes ses ressources et données seront définitivement supprimées. Veuillez saisir votre mot de passe pour confirmer que vous souhaitez supprimer définitivement votre compte.",
+    "une_fois_que_votre_compte_est_supprim_toutes_ses_r": "Une fois que votre compte est supprimé, toutes ses ressources et données seront définitivement supprimées. Veuillez saisir votre mot de passe pour supprimer définitivement votre compte.",
     "mot_de_passe": "Mot de passe",
     "annuler": "Annuler",
     "changer_de_mot_de_passe": "Changer de mot de passe",
@@ -82,5 +82,6 @@
     "etape_n_sur_total": "Étape {n}/{total}",
     "slectionner_les_vtements": "Sélectionner les vêtements",
     "dressing_dorigine": "Dressing d'origine",
-    "dressing_de_destination": "Dressing de destination"
+    "dressing_de_destination": "Dressing de destination",
+    "site_title": "Dressing."
 }

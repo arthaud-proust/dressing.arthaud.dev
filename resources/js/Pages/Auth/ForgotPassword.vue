@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import VButton from '@/Components/Base/VButton.vue';
+import VInput from '@/Components/Base/VInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
@@ -23,7 +23,7 @@ const submit = () => {
     <GuestLayout>
         <Head :title="$t('mot_de_passe_oubli')" />
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-gray-600">
             {{ $t('vous_avez_oubli_votre_mot_de_passe_pas_de_problme') }}
         </div>
 
@@ -35,7 +35,7 @@ const submit = () => {
             <div>
                 <InputLabel for="email" :value="$t('email')" />
 
-                <TextInput
+                <VInput
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -49,12 +49,13 @@ const submit = () => {
             </div>
 
             <div class="mt-4 flex items-center justify-end">
-                <PrimaryButton
+                <VButton
+                    type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     {{ $t('envoyer_le_lien_de_rinitialisation') }}
-                </PrimaryButton>
+                </VButton>
             </div>
         </form>
     </GuestLayout>

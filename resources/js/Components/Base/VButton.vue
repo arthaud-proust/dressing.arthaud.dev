@@ -18,7 +18,13 @@ const props = withDefaults(
     defineProps<{
         href?: string;
         type?: 'button' | 'submit';
-        variant?: 'primary' | 'secondary' | 'tertiary' | 'danger' | 'success';
+        variant?:
+            | 'primary'
+            | 'secondary'
+            | 'tertiary'
+            | 'ghost'
+            | 'danger'
+            | 'success';
         disabled?: boolean;
         external?: boolean;
         icon?: boolean;
@@ -47,6 +53,10 @@ const colorClasses = computed(() => {
 
     if (props.variant === 'tertiary') {
         return 'bg-neutral-100 ring-neutral-400 hover:bg-neutral-200 text-neutral-800';
+    }
+
+    if (props.variant === 'ghost') {
+        return 'bg-transparent ring-neutral-400 hover:bg-neutral-100 text-neutral-500';
     }
 
     if (props.variant === 'danger') {

@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import VButton from '@/Components/Base/VButton.vue';
+import VInput from '@/Components/Base/VInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import GuestLayout from '@/Layouts/GuestLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, useForm } from '@inertiajs/vue3';
 
 const form = useForm({
     name: '',
@@ -30,7 +30,7 @@ const submit = () => {
             <div>
                 <InputLabel for="name" :value="$t('nom')" />
 
-                <TextInput
+                <VInput
                     id="name"
                     type="text"
                     class="mt-1 block w-full"
@@ -46,7 +46,7 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="email" :value="$t('email')" />
 
-                <TextInput
+                <VInput
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -61,7 +61,7 @@ const submit = () => {
             <div class="mt-4">
                 <InputLabel for="password" :value="$t('mot_de_passe')" />
 
-                <TextInput
+                <VInput
                     id="password"
                     type="password"
                     class="mt-1 block w-full"
@@ -79,7 +79,7 @@ const submit = () => {
                     :value="$t('confirmer_le_mot_de_passe')"
                 />
 
-                <TextInput
+                <VInput
                     id="password_confirmation"
                     type="password"
                     class="mt-1 block w-full"
@@ -94,21 +94,18 @@ const submit = () => {
                 />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    {{ $t('dj_inscrit') }}
-                </Link>
-
-                <PrimaryButton
-                    class="ms-4"
+            <div class="mt-4 flex flex-col gap-1">
+                <VButton
+                    type="submit"
                     :class="{ 'opacity-25': form.processing }"
                     :disabled="form.processing"
                 >
                     {{ $t('s_inscrire') }}
-                </PrimaryButton>
+                </VButton>
+
+                <VButton variant="ghost" :href="route('login')">
+                    {{ $t('dj_inscrit') }}
+                </VButton>
             </div>
         </form>
     </GuestLayout>

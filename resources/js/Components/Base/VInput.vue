@@ -3,7 +3,7 @@
         :type="type"
         :disabled="disabled"
         v-model="model"
-        class="flex items-center justify-center gap-1 rounded-lg border border-neutral-300 px-4 py-2 ring-offset-2 focus:outline-none focus:ring-4 disabled:pointer-events-none disabled:opacity-50"
+        class="flex items-center justify-center gap-1 rounded-lg border border-neutral-300 px-3 py-2 ring-neutral-400 ring-offset-2 focus:outline-none focus:ring-4 disabled:pointer-events-none disabled:opacity-50"
     />
 </template>
 <script setup lang="ts">
