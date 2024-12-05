@@ -1,10 +1,12 @@
 import { useDevicesList } from '@vueuse/core';
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
 export const useCamera = ({
+    onCamerasUpdated,
     onStream,
 }: {
-    onStream: (stream: MediaStream | null) => void;
+    onCamerasUpdated?: (cameras: Array<MediaDeviceInfo>) => void;
+    onStream?: (stream: MediaStream | null) => void;
 }) => {
     const cameraIndex = ref<number>(-1);
     const { videoInputs: cameras } = useDevicesList();
@@ -12,7 +14,12 @@ export const useCamera = ({
     const error = ref<any>();
     let stream = null as MediaStream | null;
 
-    const camera = computed<MediaDeviceInfo | undefined>(
+    watch(cameras, (c) => {
+        console.log(c);
+        onCamerasUpdated && onCamerasUpdated(c);
+    });
+
+    const selectedCamera = computed<MediaDeviceInfo | undefined>(
         () => cameras.value[cameraIndex.value],
     );
 
@@ -25,7 +32,7 @@ export const useCamera = ({
             const constraints: MediaStreamConstraints = {
                 audio: false,
                 video: {
-                    deviceId: camera.value?.deviceId,
+                    deviceId: selectedCamera.value?.deviceId,
                 },
             };
 
@@ -33,7 +40,7 @@ export const useCamera = ({
                 .getUserMedia(constraints)
                 .then((mediaStream) => {
                     stream = mediaStream;
-                    onStream(mediaStream);
+                    onStream && onStream(mediaStream);
                     resolve();
                 })
                 .catch((e) => {
@@ -63,15 +70,16 @@ export const useCamera = ({
 
     const canSelectNextCamera = computed(() => cameras.value.length > 1);
 
-    const selectRearCamera = async () => {
-        const rearCameraIndex = cameras.value.findIndex(
-            (device) =>
-                device.label?.includes('rear') ||
-                device.label?.includes('back'),
-        );
-        await selectCamera(rearCameraIndex);
-    };
+    const isRearCamera = (camera?: MediaDeviceInfo) =>
+        camera &&
+        (camera.label?.includes('rear') || camera.label?.includes('back'));
 
+    const selectRearCamera = async () =>
+        await selectCamera(cameras.value.findIndex(isRearCamera));
+
+    const isSelectedCameraMirrored = computed(
+        () => !isRearCamera(selectedCamera.value),
+    );
     return {
         canSelectNextCamera,
         selectCamera,
@@ -81,5 +89,6 @@ export const useCamera = ({
         stopCameraStream,
         isLoading,
         error,
+        isSelectedCameraMirrored,
     };
 };

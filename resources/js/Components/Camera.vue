@@ -3,7 +3,7 @@ import VButton from '@/Components/Base/VButton.vue';
 import { useCamera } from '@/composables/useCamera';
 import { useCaptureVideoFrame } from '@/composables/useCaptureVideoFrame';
 import { ArrowPathIcon, CameraIcon } from '@heroicons/vue/20/solid';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 
 const emit = defineEmits<{
     photo: [content: Blob];
@@ -14,10 +14,14 @@ const {
     isLoading,
     error,
     selectNextCamera,
+    selectRearCamera,
     canSelectNextCamera,
     stopCameraStream,
-    startCameraStream,
+    isSelectedCameraMirrored,
 } = useCamera({
+    onCamerasUpdated: () => {
+        selectRearCamera();
+    },
     onStream: (stream) => {
         if (cameraOutputRef.value) {
             cameraOutputRef.value.srcObject = stream;
@@ -31,16 +35,12 @@ const nextCam = async () => {
 };
 
 const takePhoto = async () => {
-    const photoContent = await captureFrame();
+    const photoContent = await captureFrame(isSelectedCameraMirrored.value);
 
     if (photoContent) {
         emit('photo', photoContent);
     }
 };
-
-onMounted(() => {
-    startCameraStream();
-});
 
 onBeforeUnmount(() => {
     stopCameraStream();
@@ -54,7 +54,7 @@ onBeforeUnmount(() => {
         <video
             v-show="!isLoading"
             ref="cameraOutputRef"
-            class="-scale-x-100"
+            :class="isSelectedCameraMirrored && '-scale-x-100'"
             autoplay
             muted
         ></video>

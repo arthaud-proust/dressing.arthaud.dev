@@ -6,7 +6,7 @@ export const useCaptureVideoFrame = (
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
-    const captureFrame = async () =>
+    const captureFrame = async (mirror?: boolean) =>
         new Promise<Blob | null>((resolve, reject) => {
             if (!videoElementRef.value) {
                 return reject('No video element');
@@ -30,8 +30,10 @@ export const useCaptureVideoFrame = (
             canvas.height = stream.height;
             canvas.width = stream.width;
 
-            context.translate(canvas.width, 0);
-            context.scale(-1, 1);
+            if (mirror) {
+                context.translate(canvas.width, 0);
+                context.scale(-1, 1);
+            }
 
             context.drawImage(
                 videoElementRef.value,
