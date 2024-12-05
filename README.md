@@ -1,13 +1,14 @@
 # Dressing en ligne
 [![Build](https://github.com/arthaud-proust/dev.arthaud.dressing/actions/workflows/build.yml/badge.svg)](https://github.com/arthaud-proust/dev.arthaud.dressing/actions/workflows/build.yml)
 
-## Besoin
+## Besoin initial
 - Savoir où sont mes vêtements ? (Chez Papa, Maman, Internat)
 
 ## User stories
 ### MVP
 - Quand je fais ma valise, je veux savoir quoi emmener
 - J’ai souvent besoin de changer un vêtement de lieu
+- Je dois pouvoir accéder facilement au site
 
 ### V1.1
 - J’ajoute de nouveaux vêtement une première fois en masse, puis d’autres rarement
