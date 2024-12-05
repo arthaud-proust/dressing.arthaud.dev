@@ -1,4 +1,5 @@
 # Dressing en ligne
+[![Build](https://github.com/arthaud-proust/dev.arthaud.dressing/actions/workflows/build.yml/badge.svg)](https://github.com/arthaud-proust/dev.arthaud.dressing/actions/workflows/build.yml)
 
 ## Besoin
 - Savoir où sont mes vêtements ? (Chez Papa, Maman, Internat)
