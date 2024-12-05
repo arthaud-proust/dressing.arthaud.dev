@@ -33,7 +33,7 @@ class DressingController extends Controller
 
         return Inertia::render('Dressings/Show', [
             'dressing' => DressingDto::from($dressing),
-            'clothingListByCategory' => ClothingDto::collect($dressing->clothing)->groupBy('category'),
+            'clothesByCategory' => ClothingDto::collect($dressing->clothes)->groupBy('category'),
         ]);
     }
 

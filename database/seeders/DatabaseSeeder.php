@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             'password' => config('app.test_user.password'),
         ]);
 
-        Dressing::factory(2)->for($user)->create();
+        Dressing::factory()->for($user)->create(['name' => 'Chez Papa']);
+        Dressing::factory()->for($user)->create(['name' => 'Chez Maman']);
+        Dressing::factory()->for($user)->create(['name' => 'Internat']);
     }
 }

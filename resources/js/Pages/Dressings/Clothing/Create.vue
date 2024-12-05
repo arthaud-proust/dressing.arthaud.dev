@@ -37,7 +37,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.post(route('dressings.clothing.store', props.dressing));
+    form.post(route('dressings.clothes.store', props.dressing));
 };
 
 const addImage = (photo: Blob) => {

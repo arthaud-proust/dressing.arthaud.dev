@@ -8,7 +8,7 @@ export type ClothingDto = {
 export type DressingDto = {
     id: number;
     name: string;
-    clothingCount: any | number;
+    clothesCount: any | number;
 };
 export type UserDto = {
     email: string;

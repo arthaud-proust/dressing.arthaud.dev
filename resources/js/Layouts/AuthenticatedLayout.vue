@@ -36,13 +36,13 @@ import { Link } from '@inertiajs/vue3';
                         <span>{{ $t('dressings') }}</span>
                     </Link>
                     <Link
-                        :href="route('clothing.move.index')"
+                        :href="route('clothes.move.index')"
                         class="flex h-full flex-1 flex-col items-center justify-center gap-0.5"
                     >
                         <div
                             class="rounded-full px-4 py-1"
                             :class="
-                                route().current('clothing.move.index') &&
+                                route().current('clothes.move.index') &&
                                 'bg-amber-500/20'
                             "
                         >

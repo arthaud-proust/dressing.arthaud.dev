@@ -31,7 +31,7 @@ class ClothingController extends Controller
     {
         Gate::authorize('create', [Clothing::class, $dressing]);
 
-        $clothing = $dressing->clothing()->create($request->validated());
+        $clothing = $dressing->clothes()->create($request->validated());
 
         foreach ($request->all()['images'] as $image) {
             assert($image instanceof UploadedFile);

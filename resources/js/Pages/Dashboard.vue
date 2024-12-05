@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
-import VStrechedButton from '@/Components/Base/VStrechedButton.vue';
+import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import DressingCard from '@/Components/Dressing/DressingCard.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
@@ -27,13 +27,13 @@ const props = defineProps<{
         </template>
 
         <div class="mt-auto flex flex-col justify-end gap-2">
-            <VStrechedButton
+            <VStretchedButton
                 v-for="dressing in dressings"
                 :sr-text="dressing.name"
                 :href="route('dressings.show', { dressing })"
             >
                 <DressingCard :dressing="dressing" />
-            </VStrechedButton>
+            </VStretchedButton>
         </div>
     </AuthenticatedLayout>
 </template>

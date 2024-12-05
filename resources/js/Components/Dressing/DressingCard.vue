@@ -10,7 +10,7 @@ defineProps<{
         <span class="text-amber-950">{{ $t('dressing') }}</span>
         <span class="text-2xl text-amber-800">{{ dressing.name }}</span>
         <span class="text-amber-950">{{
-            $t('vetements', dressing.clothingCount)
+            $t('vetements', dressing.clothesCount)
         }}</span>
     </div>
 </template>

@@ -21,7 +21,7 @@ class Dressing extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function clothing(): HasMany
+    public function clothes(): HasMany
     {
         return $this->hasMany(Clothing::class);
     }

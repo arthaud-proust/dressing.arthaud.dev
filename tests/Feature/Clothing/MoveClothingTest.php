@@ -17,7 +17,7 @@ class MoveClothingTest extends TestCase
     {
         $user = User::factory()->create();
         $dressingSource = Dressing::factory()->for($user)->create();
-        $clothing = $dressingSource->clothing()->create([
+        $clothing = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
@@ -25,7 +25,7 @@ class MoveClothingTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/clothing/$clothing->id/move-to-dressing/$dressingDestination->id");
+            ->post("/clothes/$clothing->id/move-to-dressing/$dressingDestination->id");
 
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect("/dressings/$dressingSource->id");
@@ -38,7 +38,7 @@ class MoveClothingTest extends TestCase
     {
         $user = User::factory()->create();
         $dressingSource = Dressing::factory()->for($user)->create();
-        $clothing = $dressingSource->clothing()->create([
+        $clothing = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
@@ -48,7 +48,7 @@ class MoveClothingTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/clothing/$clothing->id/move-to-dressing/$dressingDestination->id");
+            ->post("/clothes/$clothing->id/move-to-dressing/$dressingDestination->id");
 
         $response->assertForbidden();
 
@@ -60,7 +60,7 @@ class MoveClothingTest extends TestCase
     {
         $anotherUser = User::factory()->create();
         $dressingSource = Dressing::factory()->for($anotherUser)->create();
-        $clothing = $dressingSource->clothing()->create([
+        $clothing = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
@@ -70,7 +70,7 @@ class MoveClothingTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/clothing/$clothing->id/move-to-dressing/$dressingDestination->id");
+            ->post("/clothes/$clothing->id/move-to-dressing/$dressingDestination->id");
 
         $response->assertForbidden();
 

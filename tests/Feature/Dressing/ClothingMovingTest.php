@@ -17,11 +17,11 @@ class ClothingMovingTest extends TestCase
     {
         $user = User::factory()->create();
         $dressingSource = Dressing::factory()->for($user)->create();
-        $clothingA = $dressingSource->clothing()->create([
+        $clothingA = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
-        $clothingB = $dressingSource->clothing()->create([
+        $clothingB = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
@@ -29,7 +29,7 @@ class ClothingMovingTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/clothing/move/from/$dressingSource->id/to/$dressingDestination->id/", [
+            ->post("/clothes/move/from/$dressingSource->id/to/$dressingDestination->id/", [
                 'clothes_id' => [$clothingA->id, $clothingB->id],
             ]);
 
@@ -44,7 +44,7 @@ class ClothingMovingTest extends TestCase
     {
         $anotherUser = User::factory()->create();
         $dressingSource = Dressing::factory()->for($anotherUser)->create();
-        $clothing = $dressingSource->clothing()->create([
+        $clothing = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
@@ -54,7 +54,7 @@ class ClothingMovingTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/clothing/move/from/$dressingSource->id/to/$dressingDestination->id/", [
+            ->post("/clothes/move/from/$dressingSource->id/to/$dressingDestination->id/", [
                 'clothes_id' => [$clothing->id],
             ]);
 
@@ -68,7 +68,7 @@ class ClothingMovingTest extends TestCase
     {
         $user = User::factory()->create();
         $dressingSource = Dressing::factory()->for($user)->create();
-        $clothing = $dressingSource->clothing()->create([
+        $clothing = $dressingSource->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
@@ -78,7 +78,7 @@ class ClothingMovingTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/clothing/move/from/$dressingSource->id/to/$dressingDestination->id/", [
+            ->post("/clothes/move/from/$dressingSource->id/to/$dressingDestination->id/", [
                 'clothes_id' => [$clothing->id],
             ]);
 

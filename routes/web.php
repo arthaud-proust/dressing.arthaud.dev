@@ -17,14 +17,16 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::resource('/dressings', DressingController::class)->except('index');
+    Route::resource('dressings', DressingController::class)->except('index');
 
-    Route::get('/clothing/move', [ClothesMovingController::class, 'index'])->name("clothing.move.index");
-    Route::get('/clothing/move/from/{origin}/to/{destination}', [ClothesMovingController::class, 'create'])->name("clothing.move.create");
-    Route::post('/clothing/move/from/{origin}/to/{destination}', [ClothesMovingController::class, 'store'])->name("clothing.move.store");
-    Route::resource('/dressings.clothing', ClothingController::class)->shallow();
+    Route::get('/clothes/move', [ClothesMovingController::class, 'index'])->name("clothes.move.index");
+    Route::get('/clothes/move/from/{origin}/to/{destination}', [ClothesMovingController::class, 'create'])->name("clothes.move.create");
+    Route::post('/clothes/move/from/{origin}/to/{destination}', [ClothesMovingController::class, 'store'])->name("clothes.move.store");
+    Route::resource('dressings.clothes', ClothingController::class)->shallow()->parameters([
+        'clothes' => 'clothing',
+    ]);
 
-    Route::post('/clothing/{clothing}/move-to-dressing/{dressing}', MoveClothingController::class)->name("clothing.move-to-dressing");
+    Route::post('/clothes/{clothing}/move-to-dressing/{dressing}', MoveClothingController::class)->name("clothes.move-to-dressing");
 });
 
 require __DIR__ . '/auth.php';

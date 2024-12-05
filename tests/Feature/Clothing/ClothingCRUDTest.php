@@ -21,7 +21,7 @@ class ClothingCRUDTest extends TestCase
 
         $response = $this
             ->actingAs($user)
-            ->post("/dressings/$dressing->id/clothing", [
+            ->post("/dressings/$dressing->id/clothes", [
                 'images' => [$image],
                 'description' => 'White t-shirt',
                 'category' => ClothingCategory::TOPS_AND_T_SHIRTS->value,
@@ -41,7 +41,7 @@ class ClothingCRUDTest extends TestCase
     //    {
     //        $user = User::factory()->create();
     //        $dressing = Dressing::factory()->for($user)->create();
-    //        $clothing = $dressing->clothing()->create([
+    //        $clothing = $dressing->clothes()->create([
     //            'category' => ClothingCategory::OTHERS,
     //            'description' => '',
     //        ]);
@@ -50,7 +50,7 @@ class ClothingCRUDTest extends TestCase
     //
     //        $response = $this
     //            ->actingAs($user)
-    //            ->put("/clothing/$clothing->id", [
+    //            ->put("/clothes/$clothing->id", [
     //                'images' => [$image],
     //                'description' => 'White t-shirt',
     //                'category' => ClothingCategory::TOPS_AND_T_SHIRTS->value,
@@ -70,14 +70,14 @@ class ClothingCRUDTest extends TestCase
     {
         $user = User::factory()->create();
         $dressing = Dressing::factory()->for($user)->create();
-        $clothing = $dressing->clothing()->create([
+        $clothing = $dressing->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
 
         $response = $this
             ->actingAs($user)
-            ->delete("/clothing/$clothing->id");
+            ->delete("/clothes/$clothing->id");
 
         $response->assertSessionDoesntHaveErrors();
         $response->assertRedirect("/dressings/$dressing->id");
@@ -91,14 +91,14 @@ class ClothingCRUDTest extends TestCase
         $otherUser = User::factory()->create();
 
         $dressing = Dressing::factory()->for($user)->create();
-        $clothing = $dressing->clothing()->create([
+        $clothing = $dressing->clothes()->create([
             'category' => ClothingCategory::OTHERS,
             'description' => '',
         ]);
 
         $response = $this
             ->actingAs($otherUser)
-            ->delete("/clothing/$clothing->id");
+            ->delete("/clothes/$clothing->id");
 
         $response->assertForbidden();
 

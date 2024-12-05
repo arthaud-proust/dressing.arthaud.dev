@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
-import VStrechedButton from '@/Components/Base/VStrechedButton.vue';
+import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import ClothingCard from '@/Components/Clothing/ClothingCard.vue';
 import ClothingDetails from '@/Components/Clothing/ClothingDetails.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -10,7 +10,7 @@ import { ref } from 'vue';
 
 const props = defineProps<{
     dressing: DressingDto;
-    clothingListByCategory: Record<ClothingCategory, Array<ClothingDto>>;
+    clothesByCategory: Record<ClothingCategory, Array<ClothingDto>>;
 }>();
 
 const selectedClothing = ref<ClothingDto | null>(null);
@@ -28,7 +28,7 @@ const selectedClothing = ref<ClothingDto | null>(null);
 
                 <div class="flex flex-wrap gap-2">
                     <VButton
-                        :href="route('dressings.clothing.create', dressing)"
+                        :href="route('dressings.clothes.create', dressing)"
                     >
                         {{ $t('ajouter_un_vtement') }}
                     </VButton>
@@ -43,23 +43,18 @@ const selectedClothing = ref<ClothingDto | null>(null);
             </div>
         </template>
 
-        <section
-            class="mt-4"
-            v-for="(clothingList, category) in clothingListByCategory"
-        >
+        <section class="mt-4" v-for="(clothes, category) in clothesByCategory">
             <h3 class="text-xl">
-                {{ $t(`clothing_category.${category}`) }} ({{
-                    clothingList.length
-                }})
+                {{ $t(`clothing_category.${category}`) }} ({{ clothes.length }})
             </h3>
             <div class="mt-2 flex items-start gap-2 overflow-y-auto pb-4 pr-8">
-                <VStrechedButton
-                    v-for="clothing in clothingList"
+                <VStretchedButton
+                    v-for="clothing in clothes"
                     :sr-text="$t('voir_le_dtail')"
                     @click="selectedClothing = clothing"
                 >
                     <ClothingCard :clothing="clothing" />
-                </VStrechedButton>
+                </VStretchedButton>
             </div>
         </section>
         <ClothingDetails

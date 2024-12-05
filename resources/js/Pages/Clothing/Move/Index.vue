@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import VStrechedButton from '@/Components/Base/VStrechedButton.vue';
+import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import VTag from '@/Components/Base/VTag.vue';
 import DressingCard from '@/Components/Dressing/DressingCard.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -26,7 +26,7 @@ const selectOrigin = (dressing: DressingDto) =>
 const selectDestination = (dressing: DressingDto) => {
     destinationDressing.value = dressing;
     router.visit(
-        route('clothing.move.create', [
+        route('clothes.move.create', [
             originDressing.value,
             destinationDressing.value,
         ]),
@@ -56,13 +56,13 @@ const selectDestination = (dressing: DressingDto) => {
             <h3 class="text-xl">Dressing d'origine</h3>
 
             <div class="mt-4 flex flex-col justify-end gap-2">
-                <VStrechedButton
+                <VStretchedButton
                     v-for="dressing in dressings"
                     :sr-text="dressing.name"
                     @click="selectOrigin(dressing)"
                 >
                     <DressingCard :dressing="dressing" />
-                </VStrechedButton>
+                </VStretchedButton>
             </div>
         </template>
         <template v-else>
@@ -70,13 +70,13 @@ const selectDestination = (dressing: DressingDto) => {
             <h3 class="text-xl">Dressing de destination</h3>
 
             <div class="mt-4 flex flex-col justify-end gap-2">
-                <VStrechedButton
+                <VStretchedButton
                     v-for="dressing in destinationDressings"
                     :sr-text="dressing.name"
                     @click="selectDestination(dressing)"
                 >
                     <DressingCard :dressing="dressing" />
-                </VStrechedButton>
+                </VStretchedButton>
             </div>
         </template>
     </AuthenticatedLayout>

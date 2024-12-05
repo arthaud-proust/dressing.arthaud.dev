@@ -15,6 +15,8 @@ class Clothing extends Model implements HasMedia
     use HasFactory;
     use InteractsWithMedia;
 
+    protected $table = 'clothes';
+    
     protected $fillable = [
         'dressing_id',
         'description',
