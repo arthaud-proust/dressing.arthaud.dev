@@ -22,42 +22,31 @@ defineProps<{
             </h2>
         </template>
 
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                    <UpdateProfileInformationForm
-                        :must-verify-email="mustVerifyEmail"
-                        :status="status"
-                        class="max-w-xl"
-                    />
-                </div>
+        <div class="mx-auto max-w-md space-y-20 py-12">
+            <UpdateProfileInformationForm
+                :must-verify-email="mustVerifyEmail"
+                :status="status"
+            />
 
-                <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                    <UpdatePasswordForm class="max-w-xl" />
-                </div>
+            <UpdatePasswordForm />
 
-                <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                    <section class="space-y-6">
-                        <header>
-                            <h2 class="text-lg font-medium text-gray-900">
-                                {{ $t('se_dconnecter') }}
-                            </h2>
-                        </header>
+            <section class="space-y-2">
+                <header>
+                    <h2 class="text-lg font-medium text-gray-900">
+                        {{ $t('se_dconnecter') }}
+                    </h2>
+                </header>
 
-                        <VButton
-                            :href="route('logout')"
-                            method="post"
-                            as="button"
-                            variant="danger"
-                            >{{ $t('se_dconnecter') }}
-                        </VButton>
-                    </section>
-                </div>
+                <VButton
+                    :href="route('logout')"
+                    method="post"
+                    as="button"
+                    variant="danger"
+                    >{{ $t('se_dconnecter') }}
+                </VButton>
+            </section>
 
-                <div class="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                    <DeleteUserForm class="max-w-xl" />
-                </div>
-            </div>
+            <DeleteUserForm />
         </div>
     </AuthenticatedLayout>
 </template>

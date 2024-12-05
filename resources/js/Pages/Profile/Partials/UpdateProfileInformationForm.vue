@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import VButton from '@/Components/Base/VButton.vue';
+import VInput from '@/Components/Base/VInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
 
 defineProps<{
@@ -37,13 +37,12 @@ const form = useForm({
             <div>
                 <InputLabel for="name" :value="$t('nom')" />
 
-                <TextInput
+                <VInput
                     id="name"
                     type="text"
                     class="mt-1 block w-full"
                     v-model="form.name"
                     required
-                    autofocus
                     autocomplete="name"
                 />
 
@@ -53,7 +52,7 @@ const form = useForm({
             <div>
                 <InputLabel for="email" :value="$t('email')" />
 
-                <TextInput
+                <VInput
                     id="email"
                     type="email"
                     class="mt-1 block w-full"
@@ -93,9 +92,9 @@ const form = useForm({
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing">{{
-                    $t('enregistrer')
-                }}</PrimaryButton>
+                <VButton type="submit" :disabled="form.processing"
+                    >{{ $t('enregistrer') }}
+                </VButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"

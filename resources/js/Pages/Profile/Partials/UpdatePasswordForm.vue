@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import VButton from '@/Components/Base/VButton.vue';
+import VInput from '@/Components/Base/VInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -54,7 +54,7 @@ const updatePassword = () => {
                     :value="$t('mot_de_passe_actuel')"
                 />
 
-                <TextInput
+                <VInput
                     id="current_password"
                     ref="currentPasswordInput"
                     v-model="form.current_password"
@@ -75,7 +75,7 @@ const updatePassword = () => {
                     :value="$t('nouveau_mot_de_passe')"
                 />
 
-                <TextInput
+                <VInput
                     id="password"
                     ref="passwordInput"
                     v-model="form.password"
@@ -93,7 +93,7 @@ const updatePassword = () => {
                     :value="$t('confirmer_le_mot_de_passe')"
                 />
 
-                <TextInput
+                <VInput
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
@@ -108,9 +108,9 @@ const updatePassword = () => {
             </div>
 
             <div class="flex items-center gap-4">
-                <PrimaryButton :disabled="form.processing"
+                <VButton type="submit" :disabled="form.processing"
                     >{{ $t('enregistrer') }}
-                </PrimaryButton>
+                </VButton>
 
                 <Transition
                     enter-active-class="transition ease-in-out"

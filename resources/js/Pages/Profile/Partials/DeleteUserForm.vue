@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import DangerButton from '@/Components/DangerButton.vue';
+import VButton from '@/Components/Base/VButton.vue';
+import VInput from '@/Components/Base/VInput.vue';
 import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import Modal from '@/Components/Modal.vue';
-import SecondaryButton from '@/Components/SecondaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import { useForm } from '@inertiajs/vue3';
 import { nextTick, ref } from 'vue';
 
@@ -41,7 +40,7 @@ const closeModal = () => {
 </script>
 
 <template>
-    <section class="space-y-6">
+    <section class="space-y-4">
         <header>
             <h2 class="text-lg font-medium text-gray-900">
                 {{ $t('supprimer_le_compte') }}
@@ -52,9 +51,9 @@ const closeModal = () => {
             </p>
         </header>
 
-        <DangerButton @click="confirmUserDeletion"
+        <VButton variant="danger" @click="confirmUserDeletion"
             >{{ $t('supprimer_le_compte') }}
-        </DangerButton>
+        </VButton>
 
         <Modal :show="confirmingUserDeletion" @close="closeModal">
             <div class="p-6">
@@ -62,7 +61,7 @@ const closeModal = () => {
                     {{ $t('tesvous_sr_de_vouloir_supprimer_votre_compte') }}
                 </h2>
 
-                <p class="mt-1 text-sm text-gray-600">
+                <p class="mt-2 text-gray-600">
                     {{
                         $t('une_fois_que_votre_compte_est_supprim_toutes_ses_r')
                     }}
@@ -75,7 +74,7 @@ const closeModal = () => {
                         class="sr-only"
                     />
 
-                    <TextInput
+                    <VInput
                         id="password"
                         ref="passwordInput"
                         v-model="form.password"
@@ -89,18 +88,19 @@ const closeModal = () => {
                 </div>
 
                 <div class="mt-6 flex justify-end">
-                    <SecondaryButton @click="closeModal">
+                    <VButton variant="tertiary" @click="closeModal">
                         {{ $t('annuler') }}
-                    </SecondaryButton>
+                    </VButton>
 
-                    <DangerButton
+                    <VButton
                         class="ms-3"
                         :class="{ 'opacity-25': form.processing }"
                         :disabled="form.processing"
                         @click="deleteUser"
+                        variant="danger"
                     >
                         {{ $t('supprimer_le_compte') }}
-                    </DangerButton>
+                    </VButton>
                 </div>
             </div>
         </Modal>
