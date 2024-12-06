@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DressingColor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -14,7 +15,15 @@ class Dressing extends Model
 
     protected $fillable = [
         "name",
+        "color",
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'color' => DressingColor::class,
+        ];
+    }
 
     public function user(): BelongsTo
     {

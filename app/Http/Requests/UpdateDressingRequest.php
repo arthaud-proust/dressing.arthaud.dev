@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\DressingColor;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateDressingRequest extends FormRequest
 {
@@ -23,6 +25,7 @@ class UpdateDressingRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'color' => ['required', Rule::enum(DressingColor::class)],
         ];
     }
 }

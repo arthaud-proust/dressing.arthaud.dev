@@ -31,6 +31,7 @@ export enum DressingColor {
 export type DressingDto = {
     id: number;
     name: string;
+    color: DressingColor;
     clothesCount: any | number;
 };
 export type UserDto = {

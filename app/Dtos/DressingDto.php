@@ -2,6 +2,7 @@
 
 namespace App\Dtos;
 
+use App\Enums\DressingColor;
 use App\Models\Dressing;
 use Spatie\LaravelData\Dto;
 use Spatie\LaravelData\Optional;
@@ -13,6 +14,7 @@ class DressingDto extends Dto
     public function __construct(
         public int $id,
         public string $name,
+        public DressingColor $color,
         public int|Optional $clothesCount,
     ) {
     }
@@ -22,6 +24,7 @@ class DressingDto extends Dto
         return new self(
             $dressing->id,
             $dressing->name,
+            $dressing->color,
             $dressing->clothes->count()
         );
     }

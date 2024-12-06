@@ -2,6 +2,7 @@
 
 namespace Feature\Dressing;
 
+use App\Enums\DressingColor;
 use App\Models\Dressing;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -48,6 +49,7 @@ class DressingTest extends TestCase
             ->actingAs($user)
             ->post('/dressings', [
                 'name' => 'Home',
+                'color' => DressingColor::AMBER->value,
             ]);
 
         $dressing = Dressing::first();
@@ -66,6 +68,7 @@ class DressingTest extends TestCase
             ->actingAs($user)
             ->put("/dressings/$dressing->id", [
                 'name' => 'Home B',
+                'color' => DressingColor::AMBER->value,
             ]);
 
         $response->assertRedirect("/dressings/$dressing->id");
@@ -86,6 +89,7 @@ class DressingTest extends TestCase
             ->actingAs($otherUser)
             ->put("/dressings/$dressing->id", [
                 'name' => 'Home B',
+                'color' => DressingColor::AMBER->value,
             ]);
 
         $response->assertForbidden();

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
 import VInput from '@/Components/Base/VInput.vue';
+import DressingColorSelector from '@/Components/Dressing/DressingColorSelector.vue';
 import InputError from '@/Components/InputError.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
@@ -12,6 +13,7 @@ const props = defineProps<{
 
 const form = useForm({
     name: props.dressing.name,
+    color: props.dressing.color,
 });
 
 const submit = () => {
@@ -48,6 +50,11 @@ const submit = () => {
                 <VInput v-model="form.name" class="w-full" />
 
                 <InputError :message="form.errors.name" class="mt-2" />
+            </div>
+
+            <div>
+                <label>{{ $t('couleur') }}</label>
+                <DressingColorSelector class="mt-1" v-model="form.color" />
             </div>
 
             <VButton type="submit">{{ $t('modifier_le_dressing') }}</VButton>
