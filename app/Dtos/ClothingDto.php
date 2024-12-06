@@ -19,6 +19,7 @@ class ClothingDto extends Dto
         public int $id,
         public ClothingCategory $category,
         public array $imageUrls,
+        public array $thumbUrls,
         public ?string $description,
     ) {
     }
@@ -30,6 +31,11 @@ class ClothingDto extends Dto
             $clothing->category,
             $clothing->getMedia()->map(function (Media $media) {
                 return $media->getTemporaryUrl(now()->addHour());
+            })->toArray(),
+            $clothing->getMedia()->map(function (Media $media) {
+                return $media->hasGeneratedConversion('thumb')
+                    ? $media->getTemporaryUrl(now()->addHour(), 'thumb')
+                    : $media->getTemporaryUrl(now()->addHour());
             })->toArray(),
             $clothing->description,
         );

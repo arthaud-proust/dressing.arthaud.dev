@@ -16,7 +16,7 @@ class Clothing extends Model implements HasMedia
     use InteractsWithMedia;
 
     protected $table = 'clothes';
-    
+
     protected $fillable = [
         'dressing_id',
         'description',
@@ -33,5 +33,13 @@ class Clothing extends Model implements HasMedia
     public function dressing(): BelongsTo
     {
         return $this->belongsTo(Dressing::class);
+    }
+
+    public function registerMediaConversions(\Spatie\MediaLibrary\MediaCollections\Models\Media|null $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(256)
+            ->height(256)
+            ->sharpen(10);
     }
 }

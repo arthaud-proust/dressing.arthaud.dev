@@ -1,24 +1,31 @@
 <script setup lang="ts">
 import { ClothingDto } from '@/types/generated';
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/solid';
+import { ref } from 'vue';
 
-defineProps<{
+const props = defineProps<{
     clothing: ClothingDto;
 }>();
+
+const noImages = props.clothing.thumbUrls.length === 0;
+const imageError = ref(false);
 </script>
 <template>
     <article
         class="relative w-32 shrink-0 overflow-hidden rounded-lg bg-neutral-50"
     >
         <div class="flex gap-1">
-            <img
-                v-for="imageUrl in clothing.imageUrls"
-                :src="imageUrl"
-                alt=""
-                class="rounded-md"
-            />
+            <template v-if="!imageError">
+                <img
+                    v-for="imageUrl in clothing.thumbUrls"
+                    @error="imageError = true"
+                    :src="imageUrl"
+                    alt=""
+                    class="rounded-md"
+                />
+            </template>
             <div
-                v-if="clothing.imageUrls.length === 0"
+                v-if="noImages || imageError"
                 class="w-full rounded-md bg-neutral-100 p-6"
             >
                 <QuestionMarkCircleIcon
@@ -29,10 +36,10 @@ defineProps<{
 
         <p
             class="p-2 text-center text-xs text-neutral-500"
-            v-if="clothing.description || clothing.imageUrls.length === 0"
+            v-if="clothing.description || noImages"
         >
             {{ clothing.description }}
-            <template v-if="clothing.imageUrls.length === 0">
+            <template v-if="noImages">
                 {{ $t('aucune_description') }}
             </template>
         </p>

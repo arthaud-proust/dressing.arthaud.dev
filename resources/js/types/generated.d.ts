@@ -3,6 +3,7 @@ export type ClothingDto = {
     id: number;
     category: ClothingCategory;
     imageUrls: Array<any>;
+    thumbUrls: Array<any>;
     description: string | null;
 };
 export type DressingDto = {
