@@ -85,5 +85,8 @@
     "dressing_de_destination": "Dressing de destination",
     "site_title": "Dressing.",
     "dplacer": "Déplacer",
-    "couleur": "Couleur"
+    "couleur": "Couleur",
+    "supprimer_le_dressing": "Supprimer le dressing {name} ?",
+    "le_dressing_et_ses_n_vtements_seront_dfinitivement": "Le dressing et ses {n} vêtements seront définitivement supprimés",
+    "si_vous_ne_souhaitez_pas_supprimer_ces_vtements_dp": "Si vous ne souhaitez pas supprimer ces vêtements, déplacez-les dans un autre dressing avant."
 }
