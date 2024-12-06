@@ -36,3 +36,15 @@ jobs:
           git add --force public/build
           git commit --reuse-message HEAD --no-verify
           git push origin release/main --force
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run make deploy via ssh
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_SSH_HOST }}
+          username: ${{ secrets.DEPLOY_SSH_USERNAME }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_SSH_PORT }}
+          script: ${{ secrets.DEPLOY_SSH_SCRIPT }}
