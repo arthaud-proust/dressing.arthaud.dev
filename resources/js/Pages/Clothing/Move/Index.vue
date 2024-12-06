@@ -4,7 +4,7 @@ import VTag from '@/Components/Base/VTag.vue';
 import DressingCard from '@/Components/Dressing/DressingCard.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
-import { ArrowRightIcon } from '@heroicons/vue/20/solid';
+import { ArrowRightIcon } from '@heroicons/vue/24/outline';
 import { Head, router } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
@@ -52,7 +52,7 @@ const selectDestination = (dressing: DressingDto) => {
                 sr-text="Modifier l'origine ou la destination"
             >
                 <div class="mt-2 flex items-center gap-2">
-                    <VTag>{{ originDressing?.name ?? '?' }} </VTag>
+                    <VTag>{{ originDressing?.name ?? '?' }}</VTag>
 
                     <ArrowRightIcon class="size-5" />
 

@@ -11,7 +11,7 @@ import {
     CameraIcon,
     PlusIcon,
     XMarkIcon,
-} from '@heroicons/vue/20/solid';
+} from '@heroicons/vue/24/solid';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';

@@ -4,7 +4,7 @@
         :type="href ? undefined : type"
         :disabled="disabled"
         :href="disabled ? undefined : href"
-        class="flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50 md:focus:ring-4"
+        class="flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none disabled:pointer-events-none disabled:opacity-50 sm:focus:ring-4"
         :class="[colorClasses, shapeClasses]"
     >
         <slot />
@@ -60,7 +60,7 @@ const colorClasses = computed(() => {
     }
 
     if (props.variant === 'danger') {
-        return 'bg-red-500 ring-red-700 hover:bg-red-600 text-red-50';
+        return 'bg-red-100 ring-red-300 hover:bg-red-200 text-red-900';
     }
 
     if (props.variant === 'success') {

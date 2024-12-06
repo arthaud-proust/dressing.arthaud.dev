@@ -1,10 +1,7 @@
 <script setup lang="ts">
+import HangerIcon from '@/Components/Icon/Outline/HangerIcon.vue';
 import NoLayout from '@/Layouts/NoLayout.vue';
-import {
-    ArrowsRightLeftIcon,
-    HomeIcon,
-    UserIcon,
-} from '@heroicons/vue/24/outline';
+import { ArrowsRightLeftIcon, UserIcon } from '@heroicons/vue/24/outline';
 import { Link } from '@inertiajs/vue3';
 </script>
 
@@ -31,7 +28,7 @@ import { Link } from '@inertiajs/vue3';
                                 'bg-amber-500/20'
                             "
                         >
-                            <HomeIcon class="size-5" />
+                            <HangerIcon class="size-5" />
                         </div>
                         <span>{{ $t('dressings') }}</span>
                     </Link>
@@ -48,7 +45,7 @@ import { Link } from '@inertiajs/vue3';
                         >
                             <ArrowsRightLeftIcon class="size-5" />
                         </div>
-                        <span>Déplacer</span>
+                        <span>{{ $t('dplacer') }}</span>
                     </Link>
                     <Link
                         :href="route('profile.edit')"

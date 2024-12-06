@@ -10,11 +10,14 @@ import {
 
 import VButton from '@/Components/Base/VButton.vue';
 import VTag from '@/Components/Base/VTag.vue';
+import { TrashIcon } from '@heroicons/vue/24/outline';
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/solid';
+import { router } from '@inertiajs/vue3';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Mousewheel, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
     clothing: ClothingDto;
@@ -26,6 +29,18 @@ const emit = defineEmits<{
 
 const pagination = {
     clickable: true,
+};
+
+const confirmDeleteClothing = ref(false);
+const deleteClothing = () => {
+    if (!confirmDeleteClothing.value) {
+        confirmDeleteClothing.value = true;
+        return;
+    }
+
+    confirmDeleteClothing.value = false;
+    router.delete(route('clothes.destroy', props.clothing));
+    emit('close');
 };
 </script>
 <template>
@@ -113,13 +128,28 @@ const pagination = {
                                 </template>
                             </p>
 
-                            <VButton
-                                @click="emit('close')"
-                                variant="tertiary"
-                                class="mt-2 w-full"
-                            >
-                                {{ $t('fermer') }}
-                            </VButton>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <VButton
+                                    @click="deleteClothing"
+                                    variant="danger"
+                                    class="max-w-sm grow"
+                                >
+                                    <TrashIcon class="size-5" />
+                                    {{
+                                        confirmDeleteClothing
+                                            ? 'Confirmer'
+                                            : 'Supprimer'
+                                    }}
+                                </VButton>
+
+                                <VButton
+                                    @click="emit('close')"
+                                    variant="tertiary"
+                                    class="max-w-sm grow max-sm:w-full"
+                                >
+                                    {{ $t('fermer') }}
+                                </VButton>
+                            </div>
                         </DialogPanel>
                     </TransitionChild>
                 </div>

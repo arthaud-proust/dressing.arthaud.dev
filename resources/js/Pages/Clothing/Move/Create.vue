@@ -5,8 +5,7 @@ import VTag from '@/Components/Base/VTag.vue';
 import ClothingCard from '@/Components/Clothing/ClothingCard.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ClothingCategory, ClothingDto, DressingDto } from '@/types/generated';
-import { CheckIcon } from '@heroicons/vue/16/solid';
-import { ArrowRightIcon } from '@heroicons/vue/20/solid';
+import { ArrowRightIcon, CheckIcon } from '@heroicons/vue/24/outline';
 import { Head, router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 

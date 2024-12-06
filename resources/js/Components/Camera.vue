@@ -2,7 +2,7 @@
 import VButton from '@/Components/Base/VButton.vue';
 import { useCamera } from '@/composables/useCamera';
 import { useCaptureVideoFrame } from '@/composables/useCaptureVideoFrame';
-import { ArrowPathIcon, CameraIcon } from '@heroicons/vue/20/solid';
+import { ArrowPathIcon, CameraIcon } from '@heroicons/vue/24/solid';
 import { onBeforeUnmount, ref } from 'vue';
 
 const emit = defineEmits<{
