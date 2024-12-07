@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{a as r,c as n,q as o}from"./app-BZHDbaxf.js";const s={},a={class:"inline-flex rounded-lg bg-neutral-100 px-2 py-1 text-neutral-700"};function c(e,l){return r(),n("p",a,[o(e.$slots,"default")])}const p=t(s,[["render",c]]);export{p as V};
