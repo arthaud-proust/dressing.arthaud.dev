@@ -49,7 +49,7 @@ export const useClothingCategoriesBalance = ({
     const categoryFromString = (str: string) => Number.parseInt(str);
 
     const missingCountForCategory = (categoryId: ClothesCategoryDto['id']) =>
-        toValue(min)[categoryId] - toValue(current)[categoryId];
+        toValue(min)[categoryId] - (toValue(current)[categoryId] ?? 0);
 
     const isCategoryIncomplete = (categoryId: ClothesCategoryDto['id']) =>
         missingCountForCategory(categoryId) > 0;

@@ -18,6 +18,18 @@ describe('missingCountForCategory', () => {
         expect(balance.missingCountForCategory(1)).toBe(1);
     });
 
+    test('return 2 when 2 min and no current', () => {
+        const balance = useClothingCategoriesBalance({
+            min: {
+                1: 2,
+            },
+            current: {},
+            available: {},
+        });
+
+        expect(balance.missingCountForCategory(1)).toBe(2);
+    });
+
     test('return 0 when 2 min and 2 current', () => {
         const balance = useClothingCategoriesBalance({
             min: {
@@ -47,6 +59,18 @@ describe('isCategoryIncomplete', () => {
             available: {
                 1: 0,
             },
+        });
+
+        expect(balance.isCategoryIncomplete(1)).toBe(true);
+    });
+
+    test('return true when 2 min and no current', () => {
+        const balance = useClothingCategoriesBalance({
+            min: {
+                1: 2,
+            },
+            current: {},
+            available: {},
         });
 
         expect(balance.isCategoryIncomplete(1)).toBe(true);
