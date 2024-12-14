@@ -9,7 +9,19 @@ composer install
 ```
 
 ```bash
+cp .env.example .env
+```
+
+```bash
 ./vendor/bin/sail up
+```
+
+```bash
+./vendor/bin/sail artisan key:generate
+```
+
+```bash
+./vendor/bin/sail artisan migrate --seed
 ```
 
 ```bash
