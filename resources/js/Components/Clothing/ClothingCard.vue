@@ -34,12 +34,15 @@ const imageError = ref(false);
 
         <p
             class="p-2 text-center text-xs text-neutral-500"
-            v-if="clothing.description || noImages"
+            v-if="clothing.description"
         >
             {{ clothing.description }}
-            <template v-if="noImages">
-                {{ $t('aucune_description') }}
-            </template>
+        </p>
+        <p
+            class="p-2 text-center text-xs text-neutral-500"
+            v-else-if="noImages"
+        >
+            {{ $t('aucune_description') }}
         </p>
     </article>
 </template>

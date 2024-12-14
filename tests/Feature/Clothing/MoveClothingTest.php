@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Clothing;
 
-use App\Enums\ClothingCategory;
+use App\Models\ClothesCategory;
 use App\Models\Clothing;
 use App\Models\Dressing;
 use App\Models\User;
@@ -16,9 +16,10 @@ class MoveClothingTest extends TestCase
     public function test_can_move_clothing_to_another_dressing(): void
     {
         $user = User::factory()->create();
+        $category = ClothesCategory::factory()->for($user)->create();
         $dressingSource = Dressing::factory()->for($user)->create();
         $clothing = $dressingSource->clothes()->create([
-            'category' => ClothingCategory::OTHERS,
+            'clothes_category_id' => $category->id,
             'description' => '',
         ]);
         $dressingDestination = Dressing::factory()->for($user)->create();
@@ -37,9 +38,10 @@ class MoveClothingTest extends TestCase
     public function test_cannot_move_clothing_to_another_user_dressing(): void
     {
         $user = User::factory()->create();
+        $category = ClothesCategory::factory()->for($user)->create();
         $dressingSource = Dressing::factory()->for($user)->create();
         $clothing = $dressingSource->clothes()->create([
-            'category' => ClothingCategory::OTHERS,
+            'clothes_category_id' => $category->id,
             'description' => '',
         ]);
 
@@ -59,9 +61,10 @@ class MoveClothingTest extends TestCase
     public function test_cannot_move_clothing_from_another_user_dressing(): void
     {
         $anotherUser = User::factory()->create();
+        $category = ClothesCategory::factory()->for($anotherUser)->create();
         $dressingSource = Dressing::factory()->for($anotherUser)->create();
         $clothing = $dressingSource->clothes()->create([
-            'category' => ClothingCategory::OTHERS,
+            'clothes_category_id' => $category->id,
             'description' => '',
         ]);
 

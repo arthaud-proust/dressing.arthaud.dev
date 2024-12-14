@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Dtos\DressingDto;
-use App\Enums\ClothingCategory;
 use App\Http\Requests\Clothing\StoreClothingRequest;
 use App\Http\Requests\Clothing\UpdateClothingRequest;
 use App\Models\Clothing;
@@ -23,7 +22,6 @@ class ClothingController extends Controller
 
         return Inertia::render('Dressings/Clothing/Create', [
             'dressing' => DressingDto::from($dressing),
-            'clothingCategories' => ClothingCategory::cases(),
         ]);
     }
 
@@ -57,7 +55,10 @@ class ClothingController extends Controller
     public function update(UpdateClothingRequest $request, Clothing $clothing)
     {
         Gate::authorize('update', $clothing);
-        //
+
+        $clothing->update($request->validated());
+
+        return redirect()->route('dressings.show', $clothing->dressing);
     }
 
     public function destroy(Clothing $clothing): RedirectResponse

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Clothing;
 
-use App\Enums\ClothingCategory;
+use App\Models\ClothesCategory;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,10 +24,7 @@ class UpdateClothingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'images' => ['array'],
-            'images.*' => ['file', 'image', 'max:10000'],
-            'description' => ['nullable', 'string', 'max:255'],
-            'category' => ['required', Rule::enum(ClothingCategory::class)],
+            'clothes_category_id' => ['required', Rule::exists(ClothesCategory::class, 'id')->where('user_id', $this->user()->id)],
         ];
     }
 }
