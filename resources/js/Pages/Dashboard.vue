@@ -17,7 +17,7 @@ const props = defineProps<{
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex flex-wrap gap-2 justify-between items-center">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800">
                     {{ $t('dressings') }}
                 </h2>
@@ -39,7 +39,7 @@ const props = defineProps<{
             </div>
         </template>
 
-        <div class="mt-auto flex flex-col justify-end gap-2">
+        <div class="flex flex-col gap-2 justify-end mt-auto">
             <VStretchedButton
                 v-for="dressing in dressings"
                 :sr-text="dressing.name"
