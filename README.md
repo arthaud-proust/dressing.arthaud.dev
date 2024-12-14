@@ -13,7 +13,7 @@ cp .env.example .env
 ```
 
 ```bash
-./vendor/bin/sail up
+./vendor/bin/sail up -d
 ```
 
 ```bash
