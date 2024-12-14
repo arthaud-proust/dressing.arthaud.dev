@@ -25,6 +25,20 @@ class Dressing extends Model
         ];
     }
 
+    protected static function booted(): void
+    {
+        static::created(static function (self $dressing) {
+            $dressing->user->clothesCategories()->each(function (ClothesCategory $clothesCategory) use ($dressing) {
+                ClothesCategoryRequirement::firstOrCreate([
+                    'dressing_id' => $dressing->id,
+                    'clothes_category_id' => $clothesCategory->id,
+                ], [
+                    'min' => 0,
+                ]);
+            });
+        });
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -33,5 +47,10 @@ class Dressing extends Model
     public function clothes(): HasMany
     {
         return $this->hasMany(Clothing::class);
+    }
+
+    public function clothesCategoryRequirements(): HasMany
+    {
+        return $this->hasMany(ClothesCategoryRequirement::class);
     }
 }

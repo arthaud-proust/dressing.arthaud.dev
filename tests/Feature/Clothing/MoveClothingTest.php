@@ -1,6 +1,6 @@
 <?php
 
-namespace Feature\Clothing;
+namespace Tests\Feature\Clothing;
 
 use App\Enums\ClothingCategory;
 use App\Models\Clothing;

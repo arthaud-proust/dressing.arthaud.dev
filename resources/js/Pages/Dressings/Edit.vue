@@ -1,9 +1,13 @@
 <script setup lang="ts">
+import VAccordion from '@/Components/Base/VAccordion.vue';
+import VBackButton from '@/Components/Base/VBackButton.vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VInput from '@/Components/Base/VInput.vue';
 import DressingColorSelector from '@/Components/Dressing/DressingColorSelector.vue';
 import InputError from '@/Components/InputError.vue';
 import Modal from '@/Components/Modal.vue';
+import { useClothesCategories } from '@/composables/useClothesCategories';
+import { ClothesCountByCategoryId } from '@/composables/useClothingCategoriesBalance';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
 import { TrashIcon } from '@heroicons/vue/24/outline';
@@ -12,11 +16,15 @@ import { ref } from 'vue';
 
 const props = defineProps<{
     dressing: DressingDto;
+    clothesMinByCategory: ClothesCountByCategoryId;
 }>();
+
+const clothesCategories = useClothesCategories();
 
 const form = useForm({
     name: props.dressing.name,
     color: props.dressing.color,
+    clothesMinByCategory: props.clothesMinByCategory,
 });
 
 const submit = () => {
@@ -41,6 +49,8 @@ const closeModal = () => {
     <AuthenticatedLayout>
         <template #header>
             <div class="flex flex-wrap items-center justify-between gap-2">
+                <VBackButton :href="route('dressings.show', dressing)" />
+
                 <h2 class="text-xl font-semibold leading-tight text-gray-800">
                     {{
                         $t('modifier_le_dressing_name', { name: dressing.name })
@@ -54,7 +64,7 @@ const closeModal = () => {
             </div>
         </template>
 
-        <form class="mt-auto flex flex-col gap-4" @submit.prevent="submit">
+        <form class="mt-auto flex flex-col gap-8" @submit.prevent="submit">
             <div>
                 <label>{{ $t('nom') }}</label>
                 <VInput v-model="form.name" class="w-full" />
@@ -66,6 +76,25 @@ const closeModal = () => {
                 <label>{{ $t('couleur') }}</label>
                 <DressingColorSelector class="mt-1" v-model="form.color" />
             </div>
+
+            <VAccordion discrete>
+                <template #button>{{
+                    $t('minimum_de_vtement_par_catgorie')
+                }}</template>
+
+                <div class="grid grid-cols-2 gap-2">
+                    <div v-for="(min, categoryId) in form.clothesMinByCategory">
+                        <label class="text-sm">{{
+                            clothesCategories.name(categoryId)
+                        }}</label>
+                        <VInput
+                            class="w-full"
+                            type="number"
+                            v-model="form.clothesMinByCategory[categoryId]"
+                        />
+                    </div>
+                </div>
+            </VAccordion>
 
             <VButton type="submit">{{ $t('modifier_le_dressing') }}</VButton>
         </form>

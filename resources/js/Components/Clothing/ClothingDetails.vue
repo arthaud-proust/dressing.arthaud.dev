@@ -5,7 +5,8 @@ import { DialogTitle } from '@headlessui/vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VTag from '@/Components/Base/VTag.vue';
 import Modal from '@/Components/Modal.vue';
-import { TrashIcon } from '@heroicons/vue/24/outline';
+import { useClothesCategories } from '@/composables/useClothesCategories';
+import { TagIcon, TrashIcon } from '@heroicons/vue/24/outline';
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/solid';
 import { router } from '@inertiajs/vue3';
 import 'swiper/css';
@@ -21,6 +22,8 @@ const props = defineProps<{
 const emit = defineEmits<{
     close: [];
 }>();
+
+const clothesCategories = useClothesCategories();
 
 const pagination = {
     clickable: true,
@@ -71,7 +74,8 @@ const deleteClothing = () => {
                     {{ $t('detail_du_vetement') }}
                 </DialogTitle>
                 <VTag class="mt-2">
-                    {{ $t(`clothing_category.${clothing.category}`) }}
+                    <TagIcon class="size-5" />
+                    {{ clothesCategories.name(clothing.clothes_category_id) }}
                 </VTag>
             </div>
 

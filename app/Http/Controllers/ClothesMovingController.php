@@ -28,7 +28,7 @@ class ClothesMovingController extends Controller
         return Inertia::render('Clothing/Move/Create', [
             'originDressing' => DressingDto::from($origin),
             'destinationDressing' => DressingDto::from($destination),
-            'clothesByCategory' => ClothingDto::collect($origin->clothes)->groupBy('category'),
+            'clothesByCategory' => ClothingDto::collect($origin->clothes)->groupBy('clothes_category_id'),
         ]);
     }
 

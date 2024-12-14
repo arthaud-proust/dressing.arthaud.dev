@@ -11,9 +11,7 @@ const noImages = props.clothing.thumbUrls.length === 0;
 const imageError = ref(false);
 </script>
 <template>
-    <article
-        class="relative w-32 shrink-0 overflow-hidden rounded-lg bg-neutral-50"
-    >
+    <article class="relative w-full overflow-hidden rounded-lg bg-neutral-50">
         <div class="flex gap-1">
             <template v-if="!imageError">
                 <img

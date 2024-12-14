@@ -1,3 +1,7 @@
+export type ClothesCategoryDto = {
+    id: number;
+    name: string;
+};
 export enum ClothingCategory {
     'OTHERS' = 0,
     'TROUSERS_AND_LEGGINGS' = 1,
@@ -13,7 +17,7 @@ export enum ClothingCategory {
 }
 export type ClothingDto = {
     id: number;
-    category: ClothingCategory;
+    clothes_category_id: number;
     imageUrls: Array<any>;
     thumbUrls: Array<any>;
     description: string | null;

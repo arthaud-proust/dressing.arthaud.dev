@@ -6,7 +6,8 @@
         "dev": "vite",
         "lint": "eslint resources/js --ext .js,.ts,.vue --ignore-path .gitignore --fix",
         "prepare": "husky",
-        "test": "vue-tsc"
+        "test": "vue-tsc && vitest",
+        "test:ci": "vue-tsc && vitest run"
     },
     "devDependencies": {
         "@inertiajs/vue3": "^1.0.0",
@@ -29,6 +30,7 @@
         "tailwindcss": "^3.2.1",
         "typescript": "5.6.3",
         "vite": "^5.0",
+        "vitest": "^2.1.8",
         "vue": "^3.4.0",
         "vue-tsc": "^2.0.24"
     },

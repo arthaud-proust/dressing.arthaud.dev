@@ -1,8 +1,9 @@
 <?php
 
-namespace Feature\Clothing;
+namespace Tests\Feature\Clothing;
 
 use App\Enums\ClothingCategory;
+use App\Models\ClothesCategory;
 use App\Models\Clothing;
 use App\Models\Dressing;
 use App\Models\User;
@@ -17,6 +18,7 @@ class ClothingCRUDTest extends TestCase
     {
         $user = User::factory()->create();
         $dressing = Dressing::factory()->for($user)->create();
+        $category = ClothesCategory::factory()->for($user)->create();
         $image = $this->uploadedImageFile();
 
         $response = $this
@@ -24,7 +26,7 @@ class ClothingCRUDTest extends TestCase
             ->post("/dressings/$dressing->id/clothes", [
                 'images' => [$image],
                 'description' => 'White t-shirt',
-                'category' => ClothingCategory::TOPS_AND_T_SHIRTS->value,
+                'clothes_category_id' => $category->id,
             ]);
 
         $response->assertSessionDoesntHaveErrors();
@@ -32,7 +34,7 @@ class ClothingCRUDTest extends TestCase
 
         $clothing = Clothing::first();
         $this->assertNotNull($clothing);
-        $this->assertSame(ClothingCategory::TOPS_AND_T_SHIRTS, $clothing->category);
+        $this->assertSame($category->id, $clothing->clothes_category_id);
         $this->assertSame('White t-shirt', $clothing->description);
         $this->assertNotNull($clothing->getMedia()->first());
     }

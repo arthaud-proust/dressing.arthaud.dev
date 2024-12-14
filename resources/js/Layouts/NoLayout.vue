@@ -2,7 +2,10 @@
 
 <template>
     <div class="relative flex min-h-dvh flex-col">
-        <header class="border-b bg-white" v-if="$slots.header">
+        <header
+            class="sticky top-0 z-30 border-b bg-white"
+            v-if="$slots.header"
+        >
             <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                 <slot name="header" />
             </div>

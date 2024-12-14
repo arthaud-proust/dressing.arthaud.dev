@@ -2,7 +2,6 @@
 
 namespace App\Dtos;
 
-use App\Enums\ClothingCategory;
 use App\Models\Clothing;
 use App\Models\Media;
 use Spatie\LaravelData\Dto;
@@ -17,7 +16,7 @@ class ClothingDto extends Dto
      */
     public function __construct(
         public int $id,
-        public ClothingCategory $category,
+        public int $clothes_category_id,
         public array $imageUrls,
         public array $thumbUrls,
         public ?string $description,
@@ -28,7 +27,7 @@ class ClothingDto extends Dto
     {
         return new self(
             $clothing->id,
-            $clothing->category,
+            $clothing->clothes_category_id,
             $clothing->getMedia()->map(function (Media $media) {
                 return $media->getTemporaryUrl(now()->addHour());
             })->toArray(),

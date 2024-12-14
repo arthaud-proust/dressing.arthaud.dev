@@ -4,6 +4,7 @@ import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import DressingCard from '@/Components/Dressing/DressingCard.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
+import { PlusIcon, TagIcon } from '@heroicons/vue/24/outline';
 import { Head } from '@inertiajs/vue3';
 
 const props = defineProps<{
@@ -16,13 +17,25 @@ const props = defineProps<{
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="flex items-center justify-between">
+            <div class="flex flex-wrap items-center justify-between gap-2">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800">
                     {{ $t('dressings') }}
                 </h2>
-                <VButton :href="route('dressings.create')"
-                    >{{ $t('creer') }}
-                </VButton>
+
+                <div class="flex flex-wrap gap-2">
+                    <VButton class="ms-auto" :href="route('dressings.create')">
+                        <PlusIcon class="size-5" />
+                        {{ $t('dressing') }}
+                    </VButton>
+
+                    <VButton
+                        :href="route('clothes-categories.index')"
+                        variant="secondary"
+                    >
+                        <TagIcon class="size-5" />
+                        {{ $t('catgories') }}
+                    </VButton>
+                </div>
             </div>
         </template>
 

@@ -17,7 +17,7 @@ const props = withDefaults(
     },
 );
 
-const model = defineModel<string>({
+const model = defineModel<string | number>({
     required: true,
 });
 </script>

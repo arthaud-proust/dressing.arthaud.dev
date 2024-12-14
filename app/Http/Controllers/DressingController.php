@@ -33,7 +33,7 @@ class DressingController extends Controller
 
         return Inertia::render('Dressings/Show', [
             'dressing' => DressingDto::from($dressing),
-            'clothesByCategory' => ClothingDto::collect($dressing->clothes)->groupBy('category'),
+            'clothesByCategory' => ClothingDto::collect($dressing->clothes)->groupBy('clothes_category_id'),
         ]);
     }
 
@@ -41,8 +41,9 @@ class DressingController extends Controller
     {
         Gate::authorize('update', $dressing);
 
-        return Inertia::render('Dressings/Update', [
+        return Inertia::render('Dressings/Edit', [
             'dressing' => DressingDto::from($dressing),
+            'clothesMinByCategory' => $dressing->clothesCategoryRequirements()->pluck('min', 'clothes_category_id'),
         ]);
     }
 
@@ -50,7 +51,18 @@ class DressingController extends Controller
     {
         Gate::authorize('update', $dressing);
 
-        $dressing->update($request->validated());
+        $validated = $request->validated();
+
+        $dressing->update([
+            'name' => $validated['name'],
+            'color' => $validated['color'],
+        ]);
+
+        foreach ($validated['clothesMinByCategory'] as $categoryId => $min) {
+            $dressing->clothesCategoryRequirements()->where('clothes_category_id', $categoryId)->update([
+                'min' => $min,
+            ]);
+        }
 
         return redirect()->route('dressings.show', $dressing);
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -51,4 +52,15 @@ class User extends Authenticatable
     {
         return $this->hasMany(Dressing::class);
     }
+
+    public function clothes(): HasManyThrough
+    {
+        return $this->hasManyThrough(Clothing::class, Dressing::class);
+    }
+
+    public function clothesCategories(): HasMany
+    {
+        return $this->hasMany(ClothesCategory::class);
+    }
+
 }

@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Enums\ClothingCategory;
+use App\Models\ClothesCategory;
 use App\Models\Dressing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,7 +21,14 @@ class ClothingFactory extends Factory
         return [
             'dressing_id' => Dressing::factory(),
             'description' => fake()->sentence(),
-            'category' => fake()->randomElement(ClothingCategory::cases()),
+            'clothes_category_id' => ClothesCategory::factory(),
         ];
+    }
+
+    public function category(ClothesCategory $category): static
+    {
+        return $this->state(fn(array $attributes) => [
+            'clothes_category_id' => $category,
+        ]);
     }
 }

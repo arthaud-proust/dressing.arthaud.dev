@@ -1,39 +1,32 @@
 <script setup lang="ts">
+import VBackButton from '@/Components/Base/VBackButton.vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VSelect from '@/Components/Base/VSelect.vue';
 import VTextarea from '@/Components/Base/VTextarea.vue';
 import Camera from '@/Components/Camera.vue';
 import InputError from '@/Components/InputError.vue';
+import { useClothesCategories } from '@/composables/useClothesCategories';
 import NoLayout from '@/Layouts/NoLayout.vue';
-import { ClothingCategory, DressingDto } from '@/types/generated';
+import { DressingDto } from '@/types/generated';
 import {
     ArrowRightIcon,
     CameraIcon,
     PlusIcon,
     XMarkIcon,
 } from '@heroicons/vue/24/solid';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import { computed, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
+import { Head, useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps<{
     dressing: DressingDto;
-    clothingCategories: Array<ClothingCategory>;
 }>();
 
-const { t } = useI18n();
-
-const clothingCategoriesOptions = computed(() =>
-    props.clothingCategories.map((value) => ({
-        value,
-        label: t(`clothing_category.${value}`),
-    })),
-);
+const clothesCategories = useClothesCategories();
 
 const form = useForm({
     images: [] as Array<Blob>,
     description: '',
-    category: props.clothingCategories[0],
+    clothes_category_id: clothesCategories.options[0].value,
 });
 
 const submit = () => {
@@ -59,17 +52,17 @@ const step = ref<1 | 2>(1);
 
     <NoLayout>
         <template #header>
-            <Link :href="route('dressings.show', dressing)"
-                >{{ $t('retour') }}
-            </Link>
+            <div class="flex flex-wrap items-center justify-between gap-2">
+                <VBackButton :href="route('dressings.show', dressing)" />
 
-            <h2 class="mt-2 text-xl font-semibold leading-tight text-gray-800">
-                {{
-                    $t('ajouter_un_vtement_au_dressing', {
-                        dressing: dressing.name,
-                    })
-                }}
-            </h2>
+                <h2 class="text-xl font-semibold leading-tight text-gray-800">
+                    {{
+                        $t('ajouter_un_vtement_au_dressing', {
+                            dressing: dressing.name,
+                        })
+                    }}
+                </h2>
+            </div>
         </template>
 
         <div class="mt-auto flex gap-2 overflow-y-auto pb-2 pr-8">
@@ -119,8 +112,8 @@ const step = ref<1 | 2>(1);
                 <div>
                     <label>{{ $t('catgorie') }}</label>
                     <VSelect
-                        v-model="form.category"
-                        :options="clothingCategoriesOptions"
+                        v-model="form.clothes_category_id"
+                        :options="clothesCategories.options"
                         class="w-full"
                     />
 

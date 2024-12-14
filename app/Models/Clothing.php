@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\ClothingCategory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,19 +19,17 @@ class Clothing extends Model implements HasMedia
     protected $fillable = [
         'dressing_id',
         'description',
-        'category',
+        'clothes_category_id',
     ];
-
-    protected function casts(): array
-    {
-        return [
-            'category' => ClothingCategory::class,
-        ];
-    }
 
     public function dressing(): BelongsTo
     {
         return $this->belongsTo(Dressing::class);
+    }
+
+    public function clothesCategory(): BelongsTo
+    {
+        return $this->belongsTo(ClothesCategory::class);
     }
 
     public function registerMediaConversions(\Spatie\MediaLibrary\MediaCollections\Models\Media|null $media = null): void

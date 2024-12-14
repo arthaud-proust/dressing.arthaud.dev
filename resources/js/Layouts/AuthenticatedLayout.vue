@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import HangerIcon from '@/Components/Icon/Outline/HangerIcon.vue';
+import SuitcaseIcon from '@/Components/Icon/Outline/SuitcaseIcon.vue';
 import NoLayout from '@/Layouts/NoLayout.vue';
 import { ArrowsRightLeftIcon, UserIcon } from '@heroicons/vue/24/outline';
 import { Link } from '@inertiajs/vue3';
@@ -31,6 +32,21 @@ import { Link } from '@inertiajs/vue3';
                             <HangerIcon class="size-5" />
                         </div>
                         <span>{{ $t('dressings') }}</span>
+                    </Link>
+                    <Link
+                        :href="route('suitcase.index')"
+                        class="flex h-full flex-1 flex-col items-center justify-center gap-0.5"
+                    >
+                        <div
+                            class="rounded-full px-4 py-1"
+                            :class="
+                                route().current('suitcase.index') &&
+                                'bg-amber-500/20'
+                            "
+                        >
+                            <SuitcaseIcon class="size-5" />
+                        </div>
+                        <span>{{ $t('valise') }}</span>
                     </Link>
                     <Link
                         :href="route('clothes.move.index')"
