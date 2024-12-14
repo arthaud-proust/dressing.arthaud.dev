@@ -3,6 +3,7 @@ import VButton from '@/Components/Base/VButton.vue';
 import VInput from '@/Components/Base/VInput.vue';
 import DressingColorSelector from '@/Components/Dressing/DressingColorSelector.vue';
 import InputError from '@/Components/InputError.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingColor } from '@/types/generated';
 import { Head, useForm } from '@inertiajs/vue3';
@@ -22,9 +23,10 @@ const submit = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ $t('crer_un_dressing') }}
-            </h2>
+            <VPageHeader
+                :back-to="route('dashboard')"
+                :title="$t('crer_un_dressing')"
+            />
         </template>
 
         <form class="mt-auto flex flex-col gap-4" @submit.prevent="submit">

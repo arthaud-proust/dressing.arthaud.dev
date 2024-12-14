@@ -2,6 +2,7 @@
 import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import VTag from '@/Components/Base/VTag.vue';
 import DressingCard from '@/Components/Dressing/DressingCard.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { DressingDto } from '@/types/generated';
 import { ArrowRightIcon } from '@heroicons/vue/24/outline';
@@ -43,22 +44,22 @@ const selectDestination = (dressing: DressingDto) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="mt-2 text-xl font-semibold leading-tight text-gray-800">
-                {{ $t('dplacer_des_vtements') }}
-            </h2>
+            <VPageHeader :title="$t('dplacer_des_vtements')">
+                <template #title>
+                    <VStretchedButton
+                        @click="originDressing = null"
+                        sr-text="Modifier l'origine ou la destination"
+                    >
+                        <div class="mt-2 flex items-center gap-2">
+                            <VTag>{{ originDressing?.name ?? '?' }}</VTag>
 
-            <VStretchedButton
-                @click="originDressing = null"
-                sr-text="Modifier l'origine ou la destination"
-            >
-                <div class="mt-2 flex items-center gap-2">
-                    <VTag>{{ originDressing?.name ?? '?' }}</VTag>
+                            <ArrowRightIcon class="size-5" />
 
-                    <ArrowRightIcon class="size-5" />
-
-                    <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
-                </div>
-            </VStretchedButton>
+                            <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
+                        </div>
+                    </VStretchedButton>
+                </template>
+            </VPageHeader>
         </template>
 
         <template v-if="!originDressing">

@@ -6,6 +6,7 @@ import { DressingDto } from '@/types/generated';
 import { Head, router } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
+import VPageHeader from '@/Components/VPageHeader.vue';
 import { ArrowRightIcon, PencilIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps<{
@@ -39,9 +40,7 @@ const selectDestination = (dressing: DressingDto) => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="mt-2 text-xl font-semibold leading-tight text-gray-800">
-                {{ $t('faire_ma_valise') }}
-            </h2>
+            <VPageHeader :title="$t('faire_ma_valise')" />
         </template>
 
         <template v-if="!originDressing">

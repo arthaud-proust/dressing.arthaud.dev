@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import VBackButton from '@/Components/Base/VBackButton.vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VSelect from '@/Components/Base/VSelect.vue';
 import VTextarea from '@/Components/Base/VTextarea.vue';
 import Camera from '@/Components/Camera.vue';
 import InputError from '@/Components/InputError.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import { useClothesCategories } from '@/composables/useClothesCategories';
 import NoLayout from '@/Layouts/NoLayout.vue';
 import { DressingDto } from '@/types/generated';
@@ -52,17 +52,15 @@ const step = ref<1 | 2>(1);
 
     <NoLayout>
         <template #header>
-            <div class="flex flex-wrap items-center justify-between gap-2">
-                <VBackButton :href="route('dressings.show', dressing)" />
-
-                <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                    {{
-                        $t('ajouter_un_vtement_au_dressing', {
-                            dressing: dressing.name,
-                        })
-                    }}
-                </h2>
-            </div>
+            <VPageHeader
+                :back-to="route('dressings.show', dressing)"
+                :title="
+                    $t('ajouter_un_vtement_au_dressing', {
+                        dressing: dressing.name,
+                    })
+                "
+            >
+            </VPageHeader>
         </template>
 
         <div class="mt-auto flex gap-2 overflow-y-auto pb-2 pr-8">

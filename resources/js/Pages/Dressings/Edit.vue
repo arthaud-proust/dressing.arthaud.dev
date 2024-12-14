@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import VAccordion from '@/Components/Base/VAccordion.vue';
-import VBackButton from '@/Components/Base/VBackButton.vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VInput from '@/Components/Base/VInput.vue';
 import DressingColorSelector from '@/Components/Dressing/DressingColorSelector.vue';
 import InputError from '@/Components/InputError.vue';
 import Modal from '@/Components/Modal.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import { useClothesCategories } from '@/composables/useClothesCategories';
 import { ClothesCountByCategoryId } from '@/composables/useClothingCategoriesBalance';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
@@ -48,20 +48,17 @@ const closeModal = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="flex flex-wrap items-center justify-between gap-2">
-                <VBackButton :href="route('dressings.show', dressing)" />
-
-                <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                    {{
-                        $t('modifier_le_dressing_name', { name: dressing.name })
-                    }}
-                </h2>
-
+            <VPageHeader
+                :back-to="route('dressings.show', dressing)"
+                :title="
+                    $t('modifier_le_dressing_name', { name: dressing.name })
+                "
+            >
                 <VButton @click="confirmDressingDeletion" variant="danger">
                     <TrashIcon class="size-5" />
                     {{ $t('supprimer') }}
                 </VButton>
-            </div>
+            </VPageHeader>
         </template>
 
         <form class="mt-auto flex flex-col gap-8" @submit.prevent="submit">
@@ -78,9 +75,9 @@ const closeModal = () => {
             </div>
 
             <VAccordion discrete>
-                <template #button>{{
-                    $t('minimum_de_vtement_par_catgorie')
-                }}</template>
+                <template #button
+                    >{{ $t('minimum_de_vtement_par_catgorie') }}
+                </template>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div v-for="(min, categoryId) in form.clothesMinByCategory">

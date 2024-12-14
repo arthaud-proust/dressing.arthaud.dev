@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
@@ -17,9 +18,7 @@ defineProps<{
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                {{ $t('profil') }}
-            </h2>
+            <VPageHeader :title="$t('profil')" />
         </template>
 
         <div class="mx-auto max-w-md space-y-20 py-12">

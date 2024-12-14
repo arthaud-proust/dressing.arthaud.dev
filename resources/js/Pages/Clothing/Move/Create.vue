@@ -3,6 +3,7 @@ import VButton from '@/Components/Base/VButton.vue';
 import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import VTag from '@/Components/Base/VTag.vue';
 import ClothingCard from '@/Components/Clothing/ClothingCard.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import { useClothesCategories } from '@/composables/useClothesCategories';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ClothingDto, DressingDto } from '@/types/generated';
@@ -46,30 +47,29 @@ const send = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <h2 class="mt-2 text-xl font-semibold leading-tight text-gray-800">
-                {{ $t('dplacer_des_vtements') }}
-            </h2>
-
-            <VStretchedButton
-                :href="route('clothes.move.index')"
-                sr-text="Modifier l'origine ou la destination"
+            <VPageHeader
+                :back-to="route('clothes.move.index')"
+                :title="$t('dplacer_des_vtements')"
             >
-                <div class="mt-2 flex items-center gap-2">
-                    <VTag>{{ originDressing?.name ?? '?' }}</VTag>
+                <template #title>
+                    <VStretchedButton
+                        :href="route('clothes.move.index')"
+                        sr-text="Modifier l'origine ou la destination"
+                    >
+                        <div class="mt-2 flex items-center gap-2">
+                            <VTag>{{ originDressing?.name ?? '?' }}</VTag>
 
-                    <ArrowRightIcon class="size-5" />
+                            <ArrowRightIcon class="size-5" />
 
-                    <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
-                </div>
-            </VStretchedButton>
+                            <VTag>{{ destinationDressing?.name ?? '?' }}</VTag>
+                        </div>
+                    </VStretchedButton>
+                </template>
 
-            <VButton
-                class="mt-2"
-                @click="send"
-                :disabled="selectedClothesId.size === 0"
-            >
-                {{ $t('dplacer_n_vtements', selectedClothesId.size) }}
-            </VButton>
+                <VButton @click="send" :disabled="selectedClothesId.size === 0">
+                    {{ $t('dplacer_n_vtements', selectedClothesId.size) }}
+                </VButton>
+            </VPageHeader>
         </template>
 
         <p class="text-sm text-neutral-500">

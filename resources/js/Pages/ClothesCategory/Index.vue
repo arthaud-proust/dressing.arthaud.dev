@@ -2,9 +2,10 @@
 import VButton from '@/Components/Base/VButton.vue';
 import VInput from '@/Components/Base/VInput.vue';
 import Modal from '@/Components/Modal.vue';
+import VPageHeader from '@/Components/VPageHeader.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ClothesCategoryDto } from '@/types/generated';
-import { PencilIcon, XMarkIcon } from '@heroicons/vue/24/solid';
+import { PencilIcon, PlusIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -72,17 +73,15 @@ const deleteClothesCategory = () => {
 
     <AuthenticatedLayout>
         <template #header>
-            <div class="flex items-center justify-between">
-                <h2
-                    class="mt-2 text-xl font-semibold leading-tight text-gray-800"
-                >
-                    {{ $t('catgories_de_vtements') }}
-                </h2>
-
-                <VButton @click="openModal('create')"
-                    >{{ $t('creer') }}
+            <VPageHeader
+                :back-to="route('dashboard')"
+                :title="$t('catgories_de_vtements')"
+            >
+                <VButton @click="openModal('create')">
+                    <PlusIcon class="size-5" />
+                    {{ $t('creer') }}
                 </VButton>
-            </div>
+            </VPageHeader>
         </template>
 
         <div class="mt-auto flex flex-col gap-2">
