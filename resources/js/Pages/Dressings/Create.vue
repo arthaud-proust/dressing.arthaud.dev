@@ -42,7 +42,12 @@ const submit = () => {
                 <DressingColorSelector class="mt-1" v-model="form.color" />
             </div>
 
-            <VButton type="submit">{{ $t('crer_le_dressing') }}</VButton>
+            <VButton
+                type="submit"
+                :loading="form.processing"
+                :disabled="form.processing"
+                >{{ $t('crer_le_dressing') }}</VButton
+            >
         </form>
     </AuthenticatedLayout>
 </template>

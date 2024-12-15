@@ -139,7 +139,10 @@ const step = ref<1 | 2>(1);
                     />
                 </div>
 
-                <VButton type="submit"
+                <VButton
+                    type="submit"
+                    :disabled="form.processing"
+                    :loading="form.processing"
                     >{{ $t('ajouter_le_vtement') }}
                     <PlusIcon class="size-5" />
                 </VButton>

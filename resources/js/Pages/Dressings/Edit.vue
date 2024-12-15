@@ -93,7 +93,12 @@ const closeModal = () => {
                 </div>
             </VAccordion>
 
-            <VButton type="submit">{{ $t('modifier_le_dressing') }}</VButton>
+            <VButton
+                type="submit"
+                :disabled="form.processing"
+                :loading="form.processing"
+                >{{ $t('modifier_le_dressing') }}
+            </VButton>
         </form>
 
         <Modal :show="confirmingDressingDeletion" @close="closeModal">
@@ -119,13 +124,7 @@ const closeModal = () => {
                     {{ $t('annuler') }}
                 </VButton>
 
-                <VButton
-                    class="ms-3"
-                    :class="{ 'opacity-25': form.processing }"
-                    :disabled="form.processing"
-                    @click="deleteDressing"
-                    variant="danger"
-                >
+                <VButton class="ms-3" @click="deleteDressing" variant="danger">
                     {{ $t('supprimer') }}
                 </VButton>
             </div>

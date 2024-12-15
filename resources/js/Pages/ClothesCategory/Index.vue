@@ -119,7 +119,11 @@ const deleteClothesCategory = () => {
                     <VButton class="grow" @click="closeModal" variant="tertiary"
                         >{{ $t('annuler') }}
                     </VButton>
-                    <VButton class="grow" type="submit"
+                    <VButton
+                        class="grow"
+                        type="submit"
+                        :loading="clothesCategoryForm.processing"
+                        :disabled="clothesCategoryForm.processing"
                         >{{ $t('creer') }}
                     </VButton>
                 </div>
@@ -136,7 +140,11 @@ const deleteClothesCategory = () => {
                     <VButton class="grow" @click="closeModal" variant="tertiary"
                         >{{ $t('annuler') }}
                     </VButton>
-                    <VButton class="grow" type="submit"
+                    <VButton
+                        class="grow"
+                        type="submit"
+                        :loading="clothesCategoryForm.processing"
+                        :disabled="clothesCategoryForm.processing"
                         >{{ $t('modifier') }}
                     </VButton>
                 </div>
@@ -156,7 +164,12 @@ const deleteClothesCategory = () => {
                     <VButton class="grow" @click="closeModal" variant="tertiary"
                         >{{ $t('annuler') }}
                     </VButton>
-                    <VButton class="grow" variant="danger" type="submit"
+                    <VButton
+                        class="grow"
+                        variant="danger"
+                        type="submit"
+                        :loading="clothesCategoryForm.processing"
+                        :disabled="clothesCategoryForm.processing"
                         >{{ $t('supprimer') }}
                     </VButton>
                 </div>

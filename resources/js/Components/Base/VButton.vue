@@ -8,9 +8,12 @@
         :class="[roundedClasses, paddingClasses, marginClasses, colorClasses]"
     >
         <slot />
+
+        <SpinnerIcon v-if="loading" class="size-5 animate-spin" />
     </component>
 </template>
 <script setup lang="ts">
+import SpinnerIcon from '@/Components/Icon/Outline/SpinnerIcon.vue';
 import { Link } from '@inertiajs/vue3';
 import { computed } from 'vue';
 
@@ -26,6 +29,7 @@ const props = withDefaults(
             | 'danger'
             | 'success';
         disabled?: boolean;
+        loading?: boolean;
         external?: boolean;
         icon?: boolean;
         small?: boolean;
