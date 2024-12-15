@@ -9,7 +9,9 @@ export const useCamera = ({
     onStream?: (stream: MediaStream | null) => void;
 }) => {
     const cameraIndex = ref<number>(-1);
-    const { videoInputs: cameras } = useDevicesList();
+    const { videoInputs: cameras } = useDevicesList({
+        requestPermissions: true,
+    });
     const isLoading = ref(false);
     const error = ref<any>();
     let stream = null as MediaStream | null;
