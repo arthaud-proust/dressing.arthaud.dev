@@ -54,6 +54,7 @@ onBeforeUnmount(() => {
         <video
             v-show="!isLoading"
             ref="cameraOutputRef"
+            class="mx-auto h-full object-contain object-center"
             :class="isSelectedCameraMirrored && '-scale-x-100'"
             autoplay
             muted

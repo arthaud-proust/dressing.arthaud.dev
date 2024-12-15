@@ -29,7 +29,7 @@ class ClothingCRUDTest extends TestCase
             ]);
 
         $response->assertSessionDoesntHaveErrors();
-        $response->assertRedirect("/dressings/$dressing->id");
+        $response->assertRedirect("/dressings/$dressing->id/clothes/create");
 
         $clothing = Clothing::first();
         $this->assertNotNull($clothing);

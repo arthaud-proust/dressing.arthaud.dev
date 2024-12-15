@@ -1,21 +1,17 @@
 <script setup lang="ts">
 import VButton from '@/Components/Base/VButton.vue';
+import VInput from '@/Components/Base/VInput.vue';
 import VSelect from '@/Components/Base/VSelect.vue';
-import VTextarea from '@/Components/Base/VTextarea.vue';
 import Camera from '@/Components/Camera.vue';
 import InputError from '@/Components/InputError.vue';
 import VPageHeader from '@/Components/VPageHeader.vue';
 import { useClothesCategories } from '@/composables/useClothesCategories';
 import NoLayout from '@/Layouts/NoLayout.vue';
 import { DressingDto } from '@/types/generated';
-import {
-    ArrowRightIcon,
-    CameraIcon,
-    PlusIcon,
-    XMarkIcon,
-} from '@heroicons/vue/24/solid';
+import { PlusIcon, XMarkIcon } from '@heroicons/vue/24/solid';
 import { Head, useForm } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { useStorage } from '@vueuse/core';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     dressing: DressingDto;
@@ -23,14 +19,29 @@ const props = defineProps<{
 
 const clothesCategories = useClothesCategories();
 
+const storedClothesCategoryId = useStorage(
+    'dressing.clothes.create',
+    clothesCategories.options[0].value,
+);
+
 const form = useForm({
     images: [] as Array<Blob>,
     description: '',
-    clothes_category_id: clothesCategories.options[0].value,
+    clothes_category_id: storedClothesCategoryId.value,
+});
+
+const clothesCategoryId = computed({
+    get: () => form.clothes_category_id,
+    set: (v) => {
+        storedClothesCategoryId.value = v;
+        form.clothes_category_id = v;
+    },
 });
 
 const submit = () => {
-    form.post(route('dressings.clothes.store', props.dressing));
+    form.post(route('dressings.clothes.store', props.dressing), {
+        preserveState: false,
+    });
 };
 
 const addImage = (photo: Blob) => {
@@ -63,90 +74,63 @@ const step = ref<1 | 2>(1);
             </VPageHeader>
         </template>
 
-        <div class="mt-auto flex gap-2 overflow-y-auto pb-2 pr-8">
-            <div
-                v-for="(blob, index) in form.images"
-                class="relative h-20 shrink-0 overflow-hidden rounded-md"
-            >
-                <img
-                    class="h-full w-full object-cover"
-                    :src="urlFromBlob(blob)"
-                    alt=""
+        <form class="flex h-min flex-col gap-4" @submit.prevent="submit">
+            <div>
+                <label>{{ $t('catgorie') }}</label>
+                <VSelect
+                    v-model="clothesCategoryId"
+                    :options="clothesCategories.options"
+                    class="w-full"
                 />
-                <button
-                    type="button"
-                    class="absolute right-1 top-1 rounded-full bg-red-200/70 p-1"
-                    @click="removeImage(index)"
-                >
-                    <XMarkIcon class="h-5 w-5" />
-                </button>
+
+                <InputError :message="form.errors.description" class="mt-2" />
             </div>
-        </div>
 
-        <form class="mt-4 flex flex-col gap-4" @submit.prevent="submit">
-            <template v-if="step === 1">
-                <Camera class="mx-auto" @photo="addImage" />
+            <div>
+                <label>{{ $t('description') }} ({{ $t('optionnel') }})</label>
+                <VInput
+                    v-model="form.description"
+                    :placeholder="$t('pull_gris')"
+                    class="w-full"
+                />
 
-                <VButton @click="step = 2"
-                    >{{
-                        form.images.length > 0
-                            ? $t('suivant')
-                            : $t('continuer_sans_photo')
-                    }}
+                <InputError :message="form.errors.description" class="mt-2" />
+            </div>
 
-                    <ArrowRightIcon class="size-5" />
-                </VButton>
-            </template>
-            <template v-if="step === 2">
-                <VButton @click="step = 1" variant="secondary">
-                    <CameraIcon class="size-5" />
-                    {{
-                        form.images.length > 0
-                            ? $t('prendre_dautres_photos')
-                            : $t('prendre_des_photos')
-                    }}
-                </VButton>
-
-                <div>
-                    <label>{{ $t('catgorie') }}</label>
-                    <VSelect
-                        v-model="form.clothes_category_id"
-                        :options="clothesCategories.options"
-                        class="w-full"
-                    />
-
-                    <InputError
-                        :message="form.errors.description"
-                        class="mt-2"
-                    />
-                </div>
-
-                <div>
-                    <label
-                        >{{ $t('description') }} ({{
-                            form.images.length > 0 ? 'optionnel' : 'recommandé'
-                        }})</label
+            <div class="flex max-h-[40dvh] justify-center">
+                <template v-if="form.images.length">
+                    <div
+                        v-for="(blob, index) in form.images"
+                        class="flex justify-center"
                     >
-                    <VTextarea
-                        v-model="form.description"
-                        :placeholder="$t('pull_gris')"
-                        class="w-full"
-                    />
+                        <div class="relative h-full overflow-hidden rounded-md">
+                            <img
+                                class="h-full object-contain"
+                                :src="urlFromBlob(blob)"
+                                alt=""
+                            />
+                            <VButton
+                                icon
+                                small
+                                class="absolute right-1 top-1"
+                                variant="danger"
+                                @click="removeImage(index)"
+                            >
+                                <XMarkIcon class="h-5 w-5" />
+                            </VButton>
+                        </div>
+                    </div>
+                </template>
+                <Camera v-else class="mx-auto" @photo="addImage" />
+            </div>
 
-                    <InputError
-                        :message="form.errors.description"
-                        class="mt-2"
-                    />
-                </div>
-
-                <VButton
-                    type="submit"
-                    :disabled="form.processing"
-                    :loading="form.processing"
-                    >{{ $t('ajouter_le_vtement') }}
-                    <PlusIcon class="size-5" />
-                </VButton>
-            </template>
+            <VButton
+                type="submit"
+                :disabled="form.processing"
+                :loading="form.processing"
+                >{{ $t('ajouter_le_vtement') }}
+                <PlusIcon class="size-5" />
+            </VButton>
         </form>
     </NoLayout>
 </template>

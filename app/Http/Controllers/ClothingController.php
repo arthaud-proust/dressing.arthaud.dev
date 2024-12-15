@@ -39,7 +39,7 @@ class ClothingController extends Controller
         }
 
         return redirect()
-            ->route('dressings.show', $dressing)
+            ->route('dressings.clothes.create', $dressing)
             ->with('success', new FlashMessageDto('Vêtement ajouté'));
     }
 
