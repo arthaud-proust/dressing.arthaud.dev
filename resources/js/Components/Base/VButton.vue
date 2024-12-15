@@ -4,7 +4,7 @@
         :type="href ? undefined : type"
         :disabled="disabled"
         :href="disabled ? undefined : href"
-        class="flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none disabled:brightness-100 disabled:contrast-[0.85] disabled:saturate-50 sm:focus:ring-4"
+        class="inline-flex items-center justify-center gap-2 font-bold ring-offset-2 focus:outline-none disabled:brightness-100 disabled:contrast-[0.85] disabled:saturate-50 sm:focus:ring-4"
         :class="[roundedClasses, paddingClasses, marginClasses, colorClasses]"
     >
         <slot />
@@ -27,7 +27,8 @@ const props = withDefaults(
             | 'tertiary'
             | 'ghost'
             | 'danger'
-            | 'success';
+            | 'success'
+            | 'info';
         disabled?: boolean;
         loading?: boolean;
         external?: boolean;
@@ -81,6 +82,10 @@ const colorClasses = computed(() => {
 
     if (props.variant === 'success') {
         return 'bg-green-500 disabled:hover:bg-green-500 ring-green-700 hover:bg-green-600 text-green-50';
+    }
+
+    if (props.variant === 'info') {
+        return 'bg-blue-100 disabled:hover:bg-blue-100 ring-blue-300 hover:bg-blue-200 text-blue-900';
     }
 });
 </script>

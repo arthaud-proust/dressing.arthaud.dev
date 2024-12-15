@@ -7,7 +7,7 @@ import { Head, router } from '@inertiajs/vue3';
 import { computed, ref } from 'vue';
 
 import VPageHeader from '@/Components/VPageHeader.vue';
-import { ArrowRightIcon, PencilIcon } from '@heroicons/vue/24/outline';
+import { ArrowRightIcon, XMarkIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps<{
     dressings: Array<DressingDto>;
@@ -67,7 +67,7 @@ const selectDestination = (dressing: DressingDto) => {
                 class="mt-2"
             >
                 <DressingCard :dressing="originDressing" />
-                <PencilIcon
+                <XMarkIcon
                     class="absolute right-8 top-1/2 size-6 -translate-y-1/2"
                 />
             </VStretchedButton>

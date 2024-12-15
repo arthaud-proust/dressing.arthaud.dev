@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import VAlert from '@/Components/Base/VAlert.vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VStretchedButton from '@/Components/Base/VStretchedButton.vue';
 import VTag from '@/Components/Base/VTag.vue';
@@ -55,6 +56,7 @@ const {
     isClothingSelected,
     selectedCountForCategory,
     isCategoryCompletedWithSelection,
+    percentageOfMinNotDefined,
 } = useClothingCategoriesBalance({
     min: props.clothesMinByCategoryInDestination,
     current: props.clothesCountByCategoryInDestination,
@@ -176,9 +178,10 @@ const stepClothingInfos = computed(() => {
                         })
                     }}
                 </h3>
-                <div
+                <VAlert
                     v-if="!stepClothingInfos.canBeCompleted"
-                    class="mt-2 rounded-lg bg-orange-50 p-3 text-orange-600"
+                    type="warning"
+                    class="mt-2"
                 >
                     <p>
                         {{
@@ -199,17 +202,39 @@ const stepClothingInfos = computed(() => {
                             )
                         }}
                     </p>
-                </div>
+                </VAlert>
             </template>
         </template>
 
         <template v-if="step === 'start'">
+            <VAlert
+                v-if="percentageOfMinNotDefined > 90"
+                type="info"
+                class="mb-8"
+            >
+                <p>
+                    {{
+                        $t('tu_peux_modifier_le_minimum_de_vtement_pour_chaque')
+                    }}
+                </p>
+                <VButton
+                    small
+                    variant="info"
+                    :href="route('dressings.edit', destinationDressing)"
+                    class="mt-2"
+                >
+                    {{ $t('modifier') }}
+                </VButton>
+            </VAlert>
+
             <template v-if="incompleteCategories.length">
                 <h3 class="mt-auto text-xl">
                     {{ $t('ce_quil_faut_mettre_dans_ta_valise') }}
                 </h3>
 
-                <ul class="ms-1 mt-4 list-inside list-disc space-y-2">
+                <ul
+                    class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
+                >
                     <li v-for="category in incompleteCategories">
                         <span
                             :class="
@@ -247,7 +272,9 @@ const stepClothingInfos = computed(() => {
                     {{ $t('tu_as_dj_tout_ce_quil_faut_lbas') }}
                 </h3>
 
-                <ul class="ms-1 mt-2 list-inside list-disc">
+                <ul
+                    class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
+                >
                     <li
                         v-for="[category, count] in Object.entries(
                             clothesCountByCategoryInDestination,

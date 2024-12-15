@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import VAccordion from '@/Components/Base/VAccordion.vue';
 import VButton from '@/Components/Base/VButton.vue';
 import VInput from '@/Components/Base/VInput.vue';
 import DressingColorSelector from '@/Components/Dressing/DressingColorSelector.vue';
@@ -74,10 +73,8 @@ const closeModal = () => {
                 <DressingColorSelector class="mt-1" v-model="form.color" />
             </div>
 
-            <VAccordion discrete>
-                <template #button
-                    >{{ $t('minimum_de_vtement_par_catgorie') }}
-                </template>
+            <div>
+                <p class="mb-2">{{ $t('minimum_de_vtement_par_catgorie') }}</p>
 
                 <div class="grid grid-cols-2 gap-2">
                     <div v-for="(min, categoryId) in form.clothesMinByCategory">
@@ -91,7 +88,7 @@ const closeModal = () => {
                         />
                     </div>
                 </div>
-            </VAccordion>
+            </div>
 
             <VButton
                 type="submit"

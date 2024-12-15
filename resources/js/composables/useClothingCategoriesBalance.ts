@@ -91,6 +91,20 @@ export const useClothingCategoriesBalance = ({
         ),
     );
 
+    const percentageOfMinNotDefined = computed(() => {
+        let nCategoriesToZero = 0;
+        let nCategories = 0;
+
+        Object.values(toValue(min)).forEach((v: number) => {
+            nCategories++;
+            if (v === 0) {
+                nCategoriesToZero++;
+            }
+        });
+
+        return (100 * nCategoriesToZero) / Math.max(nCategories, 1);
+    });
+
     return {
         selectedClothesId,
         isClothingSelected,
@@ -105,5 +119,6 @@ export const useClothingCategoriesBalance = ({
         canAllCategoriesBeCompleted,
         missingCountByCategory,
         incompleteCategories,
+        percentageOfMinNotDefined,
     };
 };
