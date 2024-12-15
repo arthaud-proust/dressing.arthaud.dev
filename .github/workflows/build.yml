@@ -43,7 +43,7 @@ jobs:
     timeout-minutes: 1
     steps:
       - name: Run make deploy via ssh
-        uses: appleboy/ssh-action@v1.2.0
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.DEPLOY_SSH_HOST }}
           username: ${{ secrets.DEPLOY_SSH_USERNAME }}
