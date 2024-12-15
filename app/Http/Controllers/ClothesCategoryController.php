@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dtos\ClothesCategoryDto;
+use App\Dtos\FlashMessageDto;
 use App\Http\Requests\StoreClothingCategoryRequest;
 use App\Http\Requests\UpdateClothingCategoryRequest;
 use App\Models\ClothesCategory;
@@ -26,9 +27,11 @@ class ClothesCategoryController extends Controller
     {
         Gate::authorize('create', ClothesCategory::class);
 
-        $request->user()->clothesCategories()->create($request->validated());
+        $clothesCategory = $request->user()->clothesCategories()->create($request->validated());
 
-        return redirect()->route('clothes-categories.index');
+        return redirect()
+            ->route('clothes-categories.index')
+            ->with('success', new FlashMessageDto("Catégorie $clothesCategory->name créée"));
     }
 
     public function update(UpdateClothingCategoryRequest $request, ClothesCategory $clothesCategory): RedirectResponse
@@ -37,7 +40,9 @@ class ClothesCategoryController extends Controller
 
         $clothesCategory->update($request->validated());
 
-        return redirect()->route('clothes-categories.index');
+        return redirect()
+            ->route('clothes-categories.index')
+            ->with('success', new FlashMessageDto("Catégorie $clothesCategory->name renommée"));
     }
 
     public function destroy(ClothesCategory $clothesCategory): RedirectResponse
@@ -46,6 +51,8 @@ class ClothesCategoryController extends Controller
 
         $clothesCategory->delete();
 
-        return redirect()->route('clothes-categories.index');
+        return redirect()
+            ->route('clothes-categories.index')
+            ->with('success', new FlashMessageDto("Catégorie $clothesCategory->name supprimée"));
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dtos\DressingDto;
+use App\Dtos\FlashMessageDto;
 use App\Http\Requests\Clothing\StoreClothingRequest;
 use App\Http\Requests\Clothing\UpdateClothingRequest;
 use App\Models\Clothing;
@@ -37,19 +38,9 @@ class ClothingController extends Controller
             $clothing->addMedia($image)->toMediaCollection();
         }
 
-        return redirect()->route('dressings.show', $dressing);
-    }
-
-    public function show(Clothing $clothing)
-    {
-        Gate::authorize('view', $clothing);
-        //
-    }
-
-    public function edit(Clothing $clothing)
-    {
-        Gate::authorize('update', $clothing);
-        //
+        return redirect()
+            ->route('dressings.show', $dressing)
+            ->with('success', new FlashMessageDto('Vêtement ajouté'));
     }
 
     public function update(UpdateClothingRequest $request, Clothing $clothing)
@@ -58,7 +49,9 @@ class ClothingController extends Controller
 
         $clothing->update($request->validated());
 
-        return redirect()->route('dressings.show', $clothing->dressing);
+        return redirect()
+            ->route('dressings.show', $clothing->dressing)
+            ->with('success', new FlashMessageDto('Vêtement modifié'));
     }
 
     public function destroy(Clothing $clothing): RedirectResponse
@@ -67,6 +60,8 @@ class ClothingController extends Controller
 
         $clothing->delete();
 
-        return redirect()->route('dressings.show', $clothing->dressing);
+        return redirect()
+            ->route('dressings.show', $clothing->dressing)
+            ->with('success', new FlashMessageDto('Vêtement supprimé'));
     }
 }

@@ -14,7 +14,7 @@ import { Link } from '@inertiajs/vue3';
         <slot />
 
         <template #footer>
-            <div class="fixed bottom-0 left-0 z-40 w-full border-t bg-white">
+            <div class="fixed bottom-0 left-0 z-30 w-full border-t bg-white">
                 <nav
                     class="mx-auto flex h-16 w-full max-w-lg items-center text-center text-xs"
                 >

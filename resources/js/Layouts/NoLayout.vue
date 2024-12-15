@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FlashedMessages from '@/Components/FlashedMessages.vue';
+</script>
 
 <template>
     <div class="relative flex min-h-dvh flex-col">
@@ -18,5 +20,7 @@
         </div>
 
         <slot name="footer"></slot>
+
+        <FlashedMessages />
     </div>
 </template>

@@ -26,7 +26,7 @@ const close = () => {
 
 <template>
     <TransitionRoot appear show as="template">
-        <Dialog as="div" @close="close" class="relative z-50">
+        <Dialog as="div" @close="close" class="relative z-40">
             <TransitionChild
                 as="template"
                 enter="duration-300 ease-out"

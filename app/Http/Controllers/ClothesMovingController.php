@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dtos\ClothingDto;
 use App\Dtos\DressingDto;
+use App\Dtos\FlashMessageDto;
 use App\Http\Requests\Clothing\MoveClothesRequest;
 use App\Models\Dressing;
 use Illuminate\Http\RedirectResponse;
@@ -39,6 +40,10 @@ class ClothesMovingController extends Controller
 
         $origin->clothes()->whereIn('id', $request->input('clothes_id'))->update(['dressing_id' => $destination->id]);
 
-        return redirect()->route('dressings.show', $destination);
+        $count = count($request->input('clothes_id'));
+
+        return redirect()
+            ->route('dressings.show', $destination)
+            ->with('success', new FlashMessageDto("$count vêtements déplacés"));
     }
 }

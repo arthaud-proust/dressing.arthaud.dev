@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Dtos\ClothingDto;
 use App\Dtos\DressingDto;
+use App\Dtos\FlashMessageDto;
 use App\Http\Requests\StoreDressingRequest;
 use App\Http\Requests\UpdateDressingRequest;
 use App\Models\Dressing;
@@ -24,7 +25,9 @@ class DressingController extends Controller
     {
         $dressing = $request->user()->dressings()->create($request->validated());
 
-        return redirect()->route('dressings.show', $dressing);
+        return redirect()
+            ->route('dressings.show', $dressing)
+            ->with('success', new FlashMessageDto("Dressing $dressing->name créé"));
     }
 
     public function show(Dressing $dressing): Response
@@ -64,7 +67,9 @@ class DressingController extends Controller
             ]);
         }
 
-        return redirect()->route('dressings.show', $dressing);
+        return redirect()
+            ->route('dressings.show', $dressing)
+            ->with('success', new FlashMessageDto('Modifications enregistrées'));
     }
 
     public function destroy(Dressing $dressing): RedirectResponse
@@ -73,6 +78,8 @@ class DressingController extends Controller
 
         $dressing->delete();
 
-        return redirect()->route('dashboard');
+        return redirect()
+            ->route('dashboard')
+            ->with('success', new FlashMessageDto("Dressing $dressing->name supprimé"));
     }
 }

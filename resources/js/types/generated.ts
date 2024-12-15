@@ -38,6 +38,10 @@ export type DressingDto = {
     color: DressingColor;
     clothesCount: any | number;
 };
+export type FlashMessageDto = {
+    id: string;
+    content: string;
+};
 export type UserDto = {
     email: string;
 };
