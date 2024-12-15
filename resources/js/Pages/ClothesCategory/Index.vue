@@ -5,7 +5,7 @@ import Modal from '@/Components/Modal.vue';
 import VPageHeader from '@/Components/VPageHeader.vue';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { ClothesCategoryDto } from '@/types/generated';
-import { PencilIcon, PlusIcon, XMarkIcon } from '@heroicons/vue/24/solid';
+import { PencilIcon, PlusIcon } from '@heroicons/vue/24/solid';
 import { Head, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
@@ -91,20 +91,12 @@ const deleteClothesCategory = () => {
             >
                 <h2 class="text-xl">{{ clothesCategory.name }}</h2>
                 <VButton
+                    :href="route('clothes-categories.edit', clothesCategory)"
                     class="ml-auto"
                     icon
                     small
-                    @click="openModal('update', clothesCategory)"
                 >
                     <PencilIcon class="size-5" />
-                </VButton>
-                <VButton
-                    variant="danger"
-                    icon
-                    small
-                    @click="openModal('delete', clothesCategory)"
-                >
-                    <XMarkIcon class="size-5" />
                 </VButton>
             </article>
         </div>

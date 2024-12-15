@@ -19,7 +19,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
-    Route::resource('clothes-categories', ClothesCategoryController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::resource('clothes-categories', ClothesCategoryController::class)->only(['index', 'store', 'edit', 'update', 'destroy']);
 
     Route::resource('dressings', DressingController::class)->except('index');
 

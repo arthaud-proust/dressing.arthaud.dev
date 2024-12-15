@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Dtos\ClothesCategoryDto;
+use App\Dtos\DressingDto;
 use App\Dtos\FlashMessageDto;
 use App\Http\Requests\StoreClothingCategoryRequest;
 use App\Http\Requests\UpdateClothingCategoryRequest;
@@ -34,15 +35,33 @@ class ClothesCategoryController extends Controller
             ->with('success', new FlashMessageDto("Catégorie $clothesCategory->name créée"));
     }
 
+    public function edit(Request $request, ClothesCategory $clothesCategory): Response
+    {
+        return Inertia::render('ClothesCategory/Edit', [
+            'clothesCategory' => ClothesCategoryDto::from($clothesCategory),
+            'clothesMinByDressing' => $clothesCategory->clothesCategoryRequirements()->pluck('min', 'dressing_id'),
+            'dressings' => DressingDto::collect($request->user()->dressings),
+        ]);
+    }
+
     public function update(UpdateClothingCategoryRequest $request, ClothesCategory $clothesCategory): RedirectResponse
     {
         Gate::authorize('update', $clothesCategory);
 
-        $clothesCategory->update($request->validated());
+        $validated = $request->validated();
+        $clothesCategory->update([
+            'name' => $validated['name'],
+        ]);
+
+        foreach ($validated['clothesMinByDressing'] as $dressingId => $min) {
+            $clothesCategory->clothesCategoryRequirements()->where('dressing_id', $dressingId)->update([
+                'min' => $min,
+            ]);
+        }
 
         return redirect()
             ->route('clothes-categories.index')
-            ->with('success', new FlashMessageDto("Catégorie $clothesCategory->name renommée"));
+            ->with('success', new FlashMessageDto("Catégorie $clothesCategory->name modifiée"));
     }
 
     public function destroy(ClothesCategory $clothesCategory): RedirectResponse

@@ -61,6 +61,7 @@ class ClothesCategoryCRUDTest extends TestCase
             ->actingAs($user)
             ->put("/clothes-categories/$clothesCategory->id", [
                 'name' => 'Pantalons',
+                'clothesMinByDressing' => [],
             ]);
 
         $response->assertSessionDoesntHaveErrors();
@@ -71,7 +72,7 @@ class ClothesCategoryCRUDTest extends TestCase
         ]);
     }
 
-    public function test_can_update_clothes_category_of_another_user(): void
+    public function test_cannot_update_clothes_category_of_another_user(): void
     {
         $anotherUser = User::factory()->create();
         $clothesCategory = ClothesCategory::factory()->for($anotherUser)->create([
@@ -83,12 +84,38 @@ class ClothesCategoryCRUDTest extends TestCase
             ->actingAs($user)
             ->put("/clothes-categories/$clothesCategory->id", [
                 'name' => 'Pantalons',
+                'clothesMinByDressing' => [],
             ]);
 
         $response->assertForbidden();
 
         $this->assertDatabaseHas(ClothesCategory::class, [
             'name' => 'T-shirts',
+        ]);
+    }
+
+    public function test_can_update_clothes_category_requirements(): void
+    {
+        $user = User::factory()->create();
+        $dressing = Dressing::factory()->for($user)->create();
+        $clothesCategory = ClothesCategory::factory()->for($user)->create([
+            'name' => 'T-shirts',
+        ]);
+
+        $response = $this
+            ->actingAs($user)
+            ->put("/clothes-categories/$clothesCategory->id", [
+                'name' => 'Pantalons',
+                'clothesMinByDressing' => [
+                    (string) $dressing->id => 1,
+                ],
+            ]);
+
+        $response->assertSessionDoesntHaveErrors();
+        $response->assertRedirect("/clothes-categories");
+
+        $this->assertDatabaseHas(ClothesCategoryRequirement::class, [
+            'min' => 1,
         ]);
     }
 
