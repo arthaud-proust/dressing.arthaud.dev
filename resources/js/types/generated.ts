@@ -2,6 +2,11 @@ export type ClothesCategoryDto = {
     id: number;
     name: string;
 };
+export type ClothesCategoryOverviewDto = {
+    clothesCount: number;
+    category: ClothesCategoryDto;
+    dressings: Array<DressingOverviewDto>;
+};
 export enum ClothingCategory {
     'OTHERS' = 0,
     'TROUSERS_AND_LEGGINGS' = 1,
@@ -37,6 +42,10 @@ export type DressingDto = {
     name: string;
     color: DressingColor;
     clothesCount: any | number;
+};
+export type DressingOverviewDto = {
+    dressing: DressingDto;
+    clothesCount: number;
 };
 export type FlashMessageDto = {
     id: string;

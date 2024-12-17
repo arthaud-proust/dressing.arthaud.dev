@@ -17,6 +17,7 @@ export const useClothesCategories = () => {
     }));
 
     return {
+        all: clothesCategories,
         name,
         options,
     };

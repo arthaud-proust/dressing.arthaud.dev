@@ -126,5 +126,6 @@
     "tu_peux_modifier_le_minimum_de_vtement_pour_chaque": "Tu peux modifier le minimum de vêtement pour chaque catégorie",
     "modifier_la_catgorie": "Modifier la catégorie",
     "modifier_la_catgorie_name": "Modifier la catégorie {name}",
-    "minimum_de_vtement_par_dressing": "Minimum de vêtement par dressing"
+    "minimum_de_vtement_par_dressing": "Minimum de vêtement par dressing",
+    "vue_densemble": "Vue d'ensemble"
 }

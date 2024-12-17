@@ -6,6 +6,7 @@ use App\Http\Controllers\ClothingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DressingController;
 use App\Http\Controllers\MoveClothingController;
+use App\Http\Controllers\OverviewController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SuitcaseGuideController;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/suitcase', [SuitcaseGuideController::class, 'index'])->name("suitcase.index");
     Route::get('/suitcase/from/{origin}/to/{destination}', [SuitcaseGuideController::class, 'show'])->name("suitcase.show");
+
+    Route::get('/overview', OverviewController::class)->name('overview');
 });
 
 require __DIR__ . '/auth.php';
