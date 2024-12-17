@@ -255,7 +255,7 @@ const stepClothingInfos = computed(() => {
                                     $t(
                                         'tu_nen_as_que_n',
                                         clothesByCategoryAtOrigin[category]
-                                            ?.length,
+                                            ?.length ?? 0,
                                     )
                                 }})
                             </span>
