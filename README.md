@@ -2,6 +2,22 @@
 
 [![Build](https://github.com/arthaud-proust/dev.arthaud.dressing/actions/workflows/build.yml/badge.svg)](https://github.com/arthaud-proust/dev.arthaud.dressing/actions/workflows/build.yml)
 
+## Besoin initial
+
+Dressing s'adresse aux enfants de familles séparés qui doivent régulièrement faire leur valise pour aller de chez un parent à chez un autre.
+En effet, la gestion des habits (ai-je assez de pantalons chez mon père ?) peut être fastidieuse et fatiguante à la longue.
+
+Dressing propose de créer des dressings et d'y ajouter ses vêtements (tâche fastidieuse aussi, que l'on essaie de rendre la plus simple possible). En définissant un minimum de vêtement par catégorie, on peut ainsi indiquer quels vêtements manquent chez l'autre parent quand on fait sa valise pour y aller.
+
+## Fonctionnalités
+
+- Aide pour faire sa valise d'un endroit A à un endroit B (indique quels vêtements en fonction de ce qu'il y a dans le dressing 
+- Catégoriser les vêtement (t shirt, pull etc) pour afficher le nombre dans chaque lieu
+- Photo du vêtement optionelle (l'utilisateur ne veut pas forcément photographier ses slips)
+- Description du vêtement optionnelle
+- Ajout rapide de vêtements à la chaîne
+- Comparaison des vêtements par catégorie et par dressing
+
 ## Installation
 
 ```bash
@@ -31,33 +47,3 @@ yarn
 ```bash
 yarn dev
 ```
-
-## Besoin initial
-
-- Savoir où sont mes vêtements ? (Chez Papa, Maman, Internat)
-
-## User stories
-
-### MVP
-
-- Quand je fais ma valise, je veux savoir quoi emmener
-- J’ai souvent besoin de changer un vêtement de lieu
-- Je dois pouvoir accéder facilement au site
-
-### V1.1
-
-- J’ajoute de nouveaux vêtement une première fois en masse, puis d’autres rarement
--
-
-### V1.2
-
-- Je veux pouvoir comparer les dressings pour équilibrer mes affaires et éviter des achats superflus
-
-## Fonctionnalités
-
-- Catégoriser les vêtement (t shirt, pull etc) (pour afficher le nombre dans chaque lieu)
-- Photo du vêtement optionelle (l'utilisateur ne veut pas forcément photographier ses slips)
-- Image du vêtement (généré par IA locale ? banque d'illustrations ?)
-- Description du vêtement optionnelle
-- Description automatique ?
-- Catégorie ? (Pyjama, sortie etc)
