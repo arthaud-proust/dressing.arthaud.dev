@@ -74,7 +74,10 @@ const step = ref<1 | 2>(1);
             </VPageHeader>
         </template>
 
-        <form class="flex h-min flex-col gap-4" @submit.prevent="submit">
+        <form
+            class="mx-auto flex h-min max-w-lg flex-col gap-4"
+            @submit.prevent="submit"
+        >
             <div>
                 <label>{{ $t('catgorie') }}</label>
                 <VSelect

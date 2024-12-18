@@ -43,49 +43,51 @@ const selectDestination = (dressing: DressingDto) => {
             <VPageHeader :title="$t('faire_ma_valise')" />
         </template>
 
-        <template v-if="!originDressing">
-            <h3 class="mt-auto text-xl">{{ $t('o_estu') }}</h3>
+        <div class="mx-auto mt-auto w-full max-w-lg">
+            <template v-if="!originDressing">
+                <h3 class="text-xl">{{ $t('o_estu') }}</h3>
 
-            <div class="mt-2 flex flex-col justify-end gap-2">
+                <div class="mt-2 flex flex-col justify-end gap-2">
+                    <VStretchedButton
+                        v-for="dressing in dressings"
+                        :sr-text="dressing.name"
+                        @click="selectOrigin(dressing)"
+                    >
+                        <DressingCard :dressing="dressing" />
+                        <ArrowRightIcon
+                            class="absolute right-8 top-1/2 size-6 -translate-y-1/2"
+                        />
+                    </VStretchedButton>
+                </div>
+            </template>
+            <template v-else>
+                <h3 class="text-xl">{{ $t('o_estu') }}</h3>
                 <VStretchedButton
-                    v-for="dressing in dressings"
-                    :sr-text="dressing.name"
-                    @click="selectOrigin(dressing)"
+                    :sr-text="$t('modifier_o_tu_es')"
+                    @click="originDressing = null"
+                    class="mt-2"
                 >
-                    <DressingCard :dressing="dressing" />
-                    <ArrowRightIcon
+                    <DressingCard :dressing="originDressing" />
+                    <XMarkIcon
                         class="absolute right-8 top-1/2 size-6 -translate-y-1/2"
                     />
                 </VStretchedButton>
-            </div>
-        </template>
-        <template v-else>
-            <h3 class="mt-auto text-xl">{{ $t('o_estu') }}</h3>
-            <VStretchedButton
-                :sr-text="$t('modifier_o_tu_es')"
-                @click="originDressing = null"
-                class="mt-2"
-            >
-                <DressingCard :dressing="originDressing" />
-                <XMarkIcon
-                    class="absolute right-8 top-1/2 size-6 -translate-y-1/2"
-                />
-            </VStretchedButton>
 
-            <h3 class="mt-12 text-xl">{{ $t('o_vastu') }}</h3>
+                <h3 class="mt-12 text-xl">{{ $t('o_vastu') }}</h3>
 
-            <div class="mt-2 flex flex-col justify-end gap-2">
-                <VStretchedButton
-                    v-for="dressing in destinationDressings"
-                    :sr-text="dressing.name"
-                    @click="selectDestination(dressing)"
-                >
-                    <DressingCard :dressing="dressing" />
-                    <ArrowRightIcon
-                        class="absolute right-8 top-1/2 size-6 -translate-y-1/2"
-                    />
-                </VStretchedButton>
-            </div>
-        </template>
+                <div class="mt-2 flex flex-col justify-end gap-2">
+                    <VStretchedButton
+                        v-for="dressing in destinationDressings"
+                        :sr-text="dressing.name"
+                        @click="selectDestination(dressing)"
+                    >
+                        <DressingCard :dressing="dressing" />
+                        <ArrowRightIcon
+                            class="absolute right-8 top-1/2 size-6 -translate-y-1/2"
+                        />
+                    </VStretchedButton>
+                </div>
+            </template>
+        </div>
     </AuthenticatedLayout>
 </template>

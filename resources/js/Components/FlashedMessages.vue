@@ -44,7 +44,7 @@ watch(
 <template>
     <Teleport to="body">
         <div
-            class="fixed left-4 right-4 top-4 z-50 flex flex-col gap-2"
+            class="fixed left-4 right-4 top-4 z-50 flex flex-col items-center gap-2"
             v-if="toasts.size"
         >
             <VToast

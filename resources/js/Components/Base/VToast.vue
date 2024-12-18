@@ -36,7 +36,7 @@ onMounted(() => {
 </script>
 <template>
     <div
-        class="relative flex items-center gap-2 overflow-hidden rounded-lg px-4 py-2 shadow-lg"
+        class="relative flex max-w-lg items-center gap-2 overflow-hidden rounded-lg px-4 py-2 shadow-lg"
         :class="{
             'bg-green-100 text-green-900': type === 'success',
             'bg-red-100 text-red-900': type === 'error',

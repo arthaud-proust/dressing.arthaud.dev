@@ -5,9 +5,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
 import DeleteUserForm from './Partials/DeleteUserForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
-import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import UpdatePreferences from './Partials/UpdatePreferences.vue';
-
+import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 
 defineProps<{
     mustVerifyEmail?: boolean;
@@ -23,7 +22,7 @@ defineProps<{
             <VPageHeader :title="$t('profil')" />
         </template>
 
-        <div class="py-12 mx-auto space-y-20 max-w-md">
+        <div class="mx-auto max-w-lg space-y-20 py-12">
             <UpdatePreferences
                 :must-verify-email="mustVerifyEmail"
                 :status="status"

@@ -13,58 +13,18 @@ const props = defineProps<{
     clothesCategories: Array<ClothesCategoryDto>;
 }>();
 
-type ModalType = 'create' | 'update' | 'delete';
-const openedModal = ref<ModalType | null>(null);
+const isModalCreateOpened = ref(false);
 const clothesCategoryForm = useForm({
-    id: null,
     name: '',
-} as {
-    id: number | null;
-    name: string;
 });
 
-const openModal = (modal: ModalType, clothesCategory?: ClothesCategoryDto) => {
-    openedModal.value = modal;
-    if (clothesCategory) {
-        clothesCategoryForm.id = clothesCategory.id;
-        clothesCategoryForm.name = clothesCategory.name;
-    }
-};
-
-const closeModal = () => {
-    openedModal.value = null;
-    clothesCategoryForm.id = null;
-    clothesCategoryForm.name = '';
-};
+const openModalCreate = () => (isModalCreateOpened.value = true);
+const closeModalCreate = () => (isModalCreateOpened.value = false);
 
 const createClothesCategory = () => {
     clothesCategoryForm.post(route('clothes-categories.store'), {
-        onSuccess: closeModal,
+        onSuccess: closeModalCreate,
     });
-};
-
-const updateClothesCategory = () => {
-    if (!clothesCategoryForm.id) {
-        return;
-    }
-    clothesCategoryForm.put(
-        route('clothes-categories.update', clothesCategoryForm.id),
-        {
-            onSuccess: closeModal,
-        },
-    );
-};
-
-const deleteClothesCategory = () => {
-    if (!clothesCategoryForm.id) {
-        return;
-    }
-    clothesCategoryForm.delete(
-        route('clothes-categories.destroy', clothesCategoryForm.id),
-        {
-            onSuccess: closeModal,
-        },
-    );
 };
 </script>
 
@@ -77,14 +37,14 @@ const deleteClothesCategory = () => {
                 :back-to="route('dashboard')"
                 :title="$t('catgories_de_vtements')"
             >
-                <VButton @click="openModal('create')">
+                <VButton @click="openModalCreate">
                     <PlusIcon class="size-5" />
                     {{ $t('creer') }}
                 </VButton>
             </VPageHeader>
         </template>
 
-        <div class="mt-auto flex flex-col gap-2">
+        <div class="mx-auto mt-auto flex w-full max-w-lg flex-col gap-2 py-16">
             <article
                 v-for="clothesCategory in clothesCategories"
                 class="flex items-center gap-2 rounded-lg bg-amber-50 p-4"
@@ -101,14 +61,17 @@ const deleteClothesCategory = () => {
             </article>
         </div>
 
-        <Modal v-if="openedModal === 'create'" @close="closeModal">
+        <Modal v-if="isModalCreateOpened" @close="closeModalCreate">
             <form class="space-y-4" @submit.prevent="createClothesCategory">
                 <h2 class="text-2xl">{{ $t('crer_une_catgorie') }}</h2>
 
                 <VInput v-model="clothesCategoryForm.name" />
 
                 <div class="flex gap-2">
-                    <VButton class="grow" @click="closeModal" variant="tertiary"
+                    <VButton
+                        class="grow"
+                        @click="closeModalCreate"
+                        variant="tertiary"
                         >{{ $t('annuler') }}
                     </VButton>
                     <VButton
@@ -117,52 +80,6 @@ const deleteClothesCategory = () => {
                         :loading="clothesCategoryForm.processing"
                         :disabled="clothesCategoryForm.processing"
                         >{{ $t('creer') }}
-                    </VButton>
-                </div>
-            </form>
-        </Modal>
-
-        <Modal v-if="openedModal === 'update'" @close="closeModal">
-            <form class="space-y-4" @submit.prevent="updateClothesCategory">
-                <h2 class="text-2xl">{{ $t('renommer_la_catgorie') }}</h2>
-
-                <VInput v-model="clothesCategoryForm.name" />
-
-                <div class="flex gap-2">
-                    <VButton class="grow" @click="closeModal" variant="tertiary"
-                        >{{ $t('annuler') }}
-                    </VButton>
-                    <VButton
-                        class="grow"
-                        type="submit"
-                        :loading="clothesCategoryForm.processing"
-                        :disabled="clothesCategoryForm.processing"
-                        >{{ $t('modifier') }}
-                    </VButton>
-                </div>
-            </form>
-        </Modal>
-
-        <Modal v-if="openedModal === 'delete'" @close="closeModal">
-            <form class="space-y-4" @submit.prevent="deleteClothesCategory">
-                <h2 class="text-2xl">{{ $t('supprimer_la_catgorie') }}</h2>
-
-                <div class="font-bold">
-                    <p>{{ $t('tous_les_vtements_associs_seront_conservs') }}</p>
-                    <p>{{ $t('il_seront_marqus_comme_noncatgoris') }}</p>
-                </div>
-
-                <div class="flex gap-2">
-                    <VButton class="grow" @click="closeModal" variant="tertiary"
-                        >{{ $t('annuler') }}
-                    </VButton>
-                    <VButton
-                        class="grow"
-                        variant="danger"
-                        type="submit"
-                        :loading="clothesCategoryForm.processing"
-                        :disabled="clothesCategoryForm.processing"
-                        >{{ $t('supprimer') }}
                     </VButton>
                 </div>
             </form>

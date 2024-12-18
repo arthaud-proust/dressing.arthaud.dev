@@ -62,37 +62,39 @@ const selectDestination = (dressing: DressingDto) => {
             </VPageHeader>
         </template>
 
-        <template v-if="!originDressing">
-            <p class="mt-auto text-sm text-neutral-500">
-                {{ $t('etape_n_sur_total', { n: 1, total: 3 }) }}
-            </p>
-            <h3 class="text-xl">{{ $t('dressing_dorigine') }}</h3>
+        <div class="mx-auto mt-auto w-full max-w-lg">
+            <template v-if="!originDressing">
+                <p class="text-sm text-neutral-500">
+                    {{ $t('etape_n_sur_total', { n: 1, total: 3 }) }}
+                </p>
+                <h3 class="text-xl">{{ $t('dressing_dorigine') }}</h3>
 
-            <div class="mt-4 flex flex-col justify-end gap-2">
-                <VStretchedButton
-                    v-for="dressing in originDressings"
-                    :sr-text="dressing.name"
-                    @click="selectOrigin(dressing)"
-                >
-                    <DressingCard :dressing="dressing" />
-                </VStretchedButton>
-            </div>
-        </template>
-        <template v-else>
-            <p class="mt-auto text-sm text-neutral-500">
-                {{ $t('etape_n_sur_total', { n: 2, total: 3 }) }}
-            </p>
-            <h3 class="text-xl">{{ $t('dressing_de_destination') }}</h3>
+                <div class="mt-4 flex flex-col justify-end gap-2">
+                    <VStretchedButton
+                        v-for="dressing in originDressings"
+                        :sr-text="dressing.name"
+                        @click="selectOrigin(dressing)"
+                    >
+                        <DressingCard :dressing="dressing" />
+                    </VStretchedButton>
+                </div>
+            </template>
+            <template v-else>
+                <p class="text-sm text-neutral-500">
+                    {{ $t('etape_n_sur_total', { n: 2, total: 3 }) }}
+                </p>
+                <h3 class="text-xl">{{ $t('dressing_de_destination') }}</h3>
 
-            <div class="mt-4 flex flex-col justify-end gap-2">
-                <VStretchedButton
-                    v-for="dressing in destinationDressings"
-                    :sr-text="dressing.name"
-                    @click="selectDestination(dressing)"
-                >
-                    <DressingCard :dressing="dressing" />
-                </VStretchedButton>
-            </div>
-        </template>
+                <div class="mt-4 flex flex-col justify-end gap-2">
+                    <VStretchedButton
+                        v-for="dressing in destinationDressings"
+                        :sr-text="dressing.name"
+                        @click="selectDestination(dressing)"
+                    >
+                        <DressingCard :dressing="dressing" />
+                    </VStretchedButton>
+                </div>
+            </template>
+        </div>
     </AuthenticatedLayout>
 </template>

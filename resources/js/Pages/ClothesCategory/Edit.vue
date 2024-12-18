@@ -57,7 +57,10 @@ const closeModal = () => {
             </VPageHeader>
         </template>
 
-        <form class="mt-auto flex flex-col gap-8" @submit.prevent="submit">
+        <form
+            class="mx-auto mt-auto flex w-full max-w-lg flex-col gap-8"
+            @submit.prevent="submit"
+        >
             <div>
                 <label>{{ $t('nom') }}</label>
                 <VInput v-model="form.name" class="w-full" />

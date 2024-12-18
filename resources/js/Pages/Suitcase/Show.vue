@@ -206,35 +206,106 @@ const stepClothingInfos = computed(() => {
             </template>
         </template>
 
-        <template v-if="step === 'start'">
-            <VAlert
-                v-if="percentageOfMinNotDefined > 90"
-                type="info"
-                class="mb-8"
-            >
-                <p>
-                    {{
-                        $t('tu_peux_modifier_le_minimum_de_vtement_pour_chaque')
-                    }}
-                </p>
-                <VButton
-                    small
-                    variant="info"
-                    :href="route('dressings.edit', destinationDressing)"
-                    class="mt-2"
+        <div class="mx-auto mt-auto flex w-full max-w-lg flex-col">
+            <template v-if="step === 'start'">
+                <VAlert
+                    v-if="percentageOfMinNotDefined > 90"
+                    type="info"
+                    class="mb-8"
                 >
-                    {{ $t('modifier') }}
-                </VButton>
-            </VAlert>
+                    <p>
+                        {{
+                            $t(
+                                'tu_peux_modifier_le_minimum_de_vtement_pour_chaque',
+                            )
+                        }}
+                    </p>
+                    <VButton
+                        small
+                        variant="info"
+                        :href="route('dressings.edit', destinationDressing)"
+                        class="mt-2"
+                    >
+                        {{ $t('modifier') }}
+                    </VButton>
+                </VAlert>
 
-            <template v-if="incompleteCategories.length">
+                <template v-if="incompleteCategories.length">
+                    <h3 class="mt-auto text-xl">
+                        {{ $t('ce_quil_faut_mettre_dans_ta_valise') }}
+                    </h3>
+
+                    <ul
+                        class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
+                    >
+                        <li v-for="category in incompleteCategories">
+                            <span
+                                :class="
+                                    canCategoryBeCompleted(category) ||
+                                    'font-bold text-orange-600'
+                                "
+                            >
+                                <ExclamationTriangleIcon
+                                    v-if="!canCategoryBeCompleted(category)"
+                                    class="me-1 inline size-5 stroke-2 align-text-bottom"
+                                />
+                                <span
+                                    >{{ missingCountForCategory(category) }}
+                                    {{ clothesCategories.name(category) }}</span
+                                >
+                                <span v-if="!canCategoryBeCompleted(category)">
+                                    ({{
+                                        $t(
+                                            'tu_nen_as_que_n',
+                                            clothesByCategoryAtOrigin[category]
+                                                ?.length ?? 0,
+                                        )
+                                    }})
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+
+                    <VButton class="mt-4" @click="nextStep">
+                        {{ $t('je_commence_ma_valise') }}
+                    </VButton>
+                </template>
+                <template v-else>
+                    <h3 class="mt-auto text-xl">
+                        {{ $t('tu_as_dj_tout_ce_quil_faut_lbas') }}
+                    </h3>
+
+                    <ul
+                        class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
+                    >
+                        <li
+                            v-for="[category, count] in Object.entries(
+                                clothesCountByCategoryInDestination,
+                            )"
+                        >
+                            {{ count }}
+                            {{
+                                clothesCategories.name(
+                                    Number.parseInt(category),
+                                )
+                            }}
+                        </li>
+                    </ul>
+
+                    <VButton
+                        class="mt-4"
+                        :href="route('dressings.show', destinationDressing)"
+                    >
+                        {{ $t('voir_le_dressing') }}
+                    </VButton>
+                </template>
+            </template>
+            <template v-else-if="step === 'end'">
                 <h3 class="mt-auto text-xl">
-                    {{ $t('ce_quil_faut_mettre_dans_ta_valise') }}
+                    {{ $t('ce_quil_doit_y_avoir_dans_ta_valise') }}
                 </h3>
 
-                <ul
-                    class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
-                >
+                <ul class="ms-1 mt-2 list-inside list-disc">
                     <li v-for="category in incompleteCategories">
                         <span
                             :class="
@@ -242,134 +313,71 @@ const stepClothingInfos = computed(() => {
                                 'font-bold text-orange-600'
                             "
                         >
-                            <ExclamationTriangleIcon
-                                v-if="!canCategoryBeCompleted(category)"
-                                class="me-1 inline size-5 stroke-2 align-text-bottom"
-                            />
-                            <span
-                                >{{ missingCountForCategory(category) }}
-                                {{ clothesCategories.name(category) }}</span
-                            >
-                            <span v-if="!canCategoryBeCompleted(category)">
-                                ({{
-                                    $t(
-                                        'tu_nen_as_que_n',
-                                        clothesByCategoryAtOrigin[category]
-                                            ?.length ?? 0,
-                                    )
-                                }})
-                            </span>
+                            {{ selectedCountForCategory(category) }}
+                            {{ clothesCategories.name(category) }}
                         </span>
                     </li>
                 </ul>
 
-                <VButton class="mt-4" @click="nextStep">
-                    {{ $t('je_commence_ma_valise') }}
-                </VButton>
-            </template>
-            <template v-else>
-                <h3 class="mt-auto text-xl">
-                    {{ $t('tu_as_dj_tout_ce_quil_faut_lbas') }}
-                </h3>
-
-                <ul
-                    class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
-                >
-                    <li
-                        v-for="[category, count] in Object.entries(
-                            clothesCountByCategoryInDestination,
-                        )"
-                    >
-                        {{ count }}
-                        {{ clothesCategories.name(Number.parseInt(category)) }}
-                    </li>
-                </ul>
-
-                <VButton
-                    class="mt-4"
-                    :href="route('dressings.show', destinationDressing)"
-                >
-                    {{ $t('voir_le_dressing') }}
-                </VButton>
-            </template>
-        </template>
-        <template v-else-if="step === 'end'">
-            <h3 class="mt-auto text-xl">
-                {{ $t('ce_quil_doit_y_avoir_dans_ta_valise') }}
-            </h3>
-
-            <ul class="ms-1 mt-2 list-inside list-disc">
-                <li v-for="category in incompleteCategories">
-                    <span
-                        :class="
-                            canCategoryBeCompleted(category) ||
-                            'font-bold text-orange-600'
-                        "
-                    >
-                        {{ selectedCountForCategory(category) }}
-                        {{ clothesCategories.name(category) }}
-                    </span>
-                </li>
-            </ul>
-
-            <VButton class="mt-4" @click="send">
-                {{ $t('jai_fini_ma_valise') }}
-                <CheckIcon class="size-5" />
-            </VButton>
-        </template>
-        <template v-else-if="stepClothingInfos">
-            <div class="mt-2 grid grid-cols-2 gap-2 pb-8">
-                <VStretchedButton
-                    v-for="clothing in stepClothingInfos.clothes"
-                    :sr-text="$t('voir_le_dtail')"
-                    @click="toggleClothingSelection(clothing)"
-                    class="shrink-0 overflow-hidden rounded-xl border-4"
-                    :class="
-                        isClothingSelected(clothing)
-                            ? 'border-amber-500'
-                            : 'border-transparent'
-                    "
-                >
-                    <ClothingCard :clothing="clothing" />
-                    <div
-                        class="absolute right-1 top-1 size-6 rounded-full border p-0.5"
-                        :class="
-                            isClothingSelected(clothing)
-                                ? 'border-amber-500 bg-amber-500 text-amber-100'
-                                : 'border-neutral-200 bg-neutral-100'
-                        "
-                    >
-                        <CheckIcon
-                            v-if="isClothingSelected(clothing)"
-                            class="size-full"
-                        />
-                    </div>
-                </VStretchedButton>
-            </div>
-
-            <div class="sticky bottom-0 z-20 mt-auto w-full pb-4">
-                <VButton
-                    v-if="!stepClothingInfos.clothes?.length"
-                    class="w-full"
-                    @click="nextStep"
-                >
-                    {{ $t('suivant') }}
-                    <ArrowRightIcon class="size-5" />
-                </VButton>
-                <VButton
-                    v-else
-                    :disabled="
-                        !isCategoryCompletedWithSelection(
-                            stepClothingInfos.category,
-                        )
-                    "
-                    class="w-full"
-                    @click="nextStep"
-                >
-                    {{ $t('cest_dans_ma_valise') }}
+                <VButton class="mt-4" @click="send">
+                    {{ $t('jai_fini_ma_valise') }}
                     <CheckIcon class="size-5" />
                 </VButton>
-            </div>
-        </template>
+            </template>
+            <template v-else-if="stepClothingInfos">
+                <div class="mt-2 grid grid-cols-2 gap-2 pb-8">
+                    <VStretchedButton
+                        v-for="clothing in stepClothingInfos.clothes"
+                        :sr-text="$t('voir_le_dtail')"
+                        @click="toggleClothingSelection(clothing)"
+                        class="shrink-0 overflow-hidden rounded-xl border-4"
+                        :class="
+                            isClothingSelected(clothing)
+                                ? 'border-amber-500'
+                                : 'border-transparent'
+                        "
+                    >
+                        <ClothingCard :clothing="clothing" />
+                        <div
+                            class="absolute right-1 top-1 size-6 rounded-full border p-0.5"
+                            :class="
+                                isClothingSelected(clothing)
+                                    ? 'border-amber-500 bg-amber-500 text-amber-100'
+                                    : 'border-neutral-200 bg-neutral-100'
+                            "
+                        >
+                            <CheckIcon
+                                v-if="isClothingSelected(clothing)"
+                                class="size-full"
+                            />
+                        </div>
+                    </VStretchedButton>
+                </div>
+
+                <div class="sticky bottom-0 z-20 mt-auto w-full pb-4">
+                    <VButton
+                        v-if="!stepClothingInfos.clothes?.length"
+                        class="w-full"
+                        @click="nextStep"
+                    >
+                        {{ $t('suivant') }}
+                        <ArrowRightIcon class="size-5" />
+                    </VButton>
+                    <VButton
+                        v-else
+                        :disabled="
+                            !isCategoryCompletedWithSelection(
+                                stepClothingInfos.category,
+                            )
+                        "
+                        class="w-full"
+                        @click="nextStep"
+                    >
+                        {{ $t('cest_dans_ma_valise') }}
+                        <CheckIcon class="size-5" />
+                    </VButton>
+                </div>
+            </template>
+        </div>
     </NoLayout>
 </template>

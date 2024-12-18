@@ -46,7 +46,9 @@ const props = defineProps<{
             </div>
         </template>
 
-        <div class="mt-auto flex flex-col justify-end gap-2">
+        <div
+            class="mx-auto mt-auto flex w-full max-w-lg flex-col justify-end gap-2"
+        >
             <VStretchedButton
                 v-for="dressing in dressings"
                 :sr-text="dressing.name"

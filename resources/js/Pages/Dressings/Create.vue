@@ -29,7 +29,10 @@ const submit = () => {
             />
         </template>
 
-        <form class="mt-auto flex flex-col gap-4" @submit.prevent="submit">
+        <form
+            class="mx-auto mt-auto flex w-full max-w-lg flex-col gap-4"
+            @submit.prevent="submit"
+        >
             <div>
                 <label>{{ $t('nom') }}</label>
                 <VInput v-model="form.name" class="w-full" />
@@ -46,8 +49,8 @@ const submit = () => {
                 type="submit"
                 :loading="form.processing"
                 :disabled="form.processing"
-                >{{ $t('crer_le_dressing') }}</VButton
-            >
+                >{{ $t('crer_le_dressing') }}
+            </VButton>
         </form>
     </AuthenticatedLayout>
 </template>
