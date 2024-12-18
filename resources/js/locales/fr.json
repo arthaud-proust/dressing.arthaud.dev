@@ -123,9 +123,12 @@
     "preferences": "Préférences",
     "personnaliser_les_categories_de_vos_vetements_pour_tous_vos_dressings": "Personnalisez les catégories de vos vêtements pour tous vos dressings.",
     "optionnel": "optionnel",
-    "tu_peux_modifier_le_minimum_de_vtement_pour_chaque": "Tu peux modifier le minimum de vêtement pour chaque catégorie",
+    "tu_peux_configurer_le_minimum_de_vtement_pour_chaque": "Tu peux configurer le minimum de vêtement pour chaque catégorie",
     "modifier_la_catgorie": "Modifier la catégorie",
     "modifier_la_catgorie_name": "Modifier la catégorie {name}",
     "minimum_de_vtement_par_dressing": "Minimum de vêtement par dressing",
-    "vue_densemble": "Vue d'ensemble"
+    "vue_densemble": "Vue d'ensemble",
+    "tu_nas_pas_configur_de_minimum_par_catgorie": "Tu n'as pas configuré de minimum par catégorie",
+    "il_faut_que_tu_indique_combien_de_vtement_au_minim": "Il faut que tu indique combien de vêtement au minimum il faut dans ce dressing pour qu'on t'aide à faire ta valise.",
+    "configurer_le_dressing": "Configurer le dressing"
 }

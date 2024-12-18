@@ -209,14 +209,38 @@ const stepClothingInfos = computed(() => {
         <div class="mx-auto mt-auto flex w-full max-w-lg flex-col">
             <template v-if="step === 'start'">
                 <VAlert
-                    v-if="percentageOfMinNotDefined > 90"
+                    v-if="percentageOfMinNotDefined === 100"
+                    type="warning"
+                    class="mb-4"
+                >
+                    <p class="font-bold">
+                        {{ $t('tu_nas_pas_configur_de_minimum_par_catgorie') }}
+                    </p>
+                    <p class="mt-2">
+                        {{
+                            $t(
+                                'il_faut_que_tu_indique_combien_de_vtement_au_minim',
+                            )
+                        }}
+                    </p>
+                    <VButton
+                        small
+                        variant="warning"
+                        :href="route('dressings.edit', destinationDressing)"
+                        class="mt-2"
+                    >
+                        {{ $t('configurer_le_dressing') }}
+                    </VButton>
+                </VAlert>
+                <VAlert
+                    v-else-if="percentageOfMinNotDefined > 90"
                     type="info"
-                    class="mb-8"
+                    class="mb-4"
                 >
                     <p>
                         {{
                             $t(
-                                'tu_peux_modifier_le_minimum_de_vtement_pour_chaque',
+                                'tu_peux_configurer_le_minimum_de_vtement_pour_chaque',
                             )
                         }}
                     </p>
@@ -226,12 +250,11 @@ const stepClothingInfos = computed(() => {
                         :href="route('dressings.edit', destinationDressing)"
                         class="mt-2"
                     >
-                        {{ $t('modifier') }}
+                        {{ $t('configurer_le_dressing') }}
                     </VButton>
                 </VAlert>
-
                 <template v-if="incompleteCategories.length">
-                    <h3 class="mt-auto text-xl">
+                    <h3 class="text-xl">
                         {{ $t('ce_quil_faut_mettre_dans_ta_valise') }}
                     </h3>
 
@@ -271,12 +294,16 @@ const stepClothingInfos = computed(() => {
                     </VButton>
                 </template>
                 <template v-else>
-                    <h3 class="mt-auto text-xl">
+                    <h3 class="text-xl">
                         {{ $t('tu_as_dj_tout_ce_quil_faut_lbas') }}
                     </h3>
 
                     <ul
                         class="mt-4 list-inside list-disc space-y-2 rounded-lg bg-neutral-50 px-4 py-2"
+                        v-if="
+                            Object.entries(clothesCountByCategoryInDestination)
+                                .length
+                        "
                     >
                         <li
                             v-for="[category, count] in Object.entries(

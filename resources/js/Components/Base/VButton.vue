@@ -27,6 +27,7 @@ const props = withDefaults(
             | 'tertiary'
             | 'ghost'
             | 'danger'
+            | 'warning'
             | 'success'
             | 'info';
         disabled?: boolean;
@@ -78,6 +79,10 @@ const colorClasses = computed(() => {
 
     if (props.variant === 'danger') {
         return 'bg-red-100 disabled:hover:bg-red-100 ring-red-300 hover:bg-red-200 text-red-900';
+    }
+
+    if (props.variant === 'warning') {
+        return 'bg-orange-100 disabled:hover:bg-orange-100 ring-orange-300 hover:bg-orange-200 text-orange-900';
     }
 
     if (props.variant === 'success') {
