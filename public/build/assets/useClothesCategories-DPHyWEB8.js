@@ -1,0 +1,1 @@
+import{a8 as c,ab as i}from"./app-Dx26qlXV.js";const p=()=>{const o=c(),{t}=i(),s=o.props.clothesCategories??[],a=e=>(e?s[e]:void 0)??t("non_categorises"),n=Object.entries(s).map(([e,r])=>({value:Number.parseInt(e),label:r}));return{all:s,name:a,options:n}};export{p as u};

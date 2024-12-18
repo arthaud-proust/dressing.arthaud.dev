@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{a as n,c as r,q as s}from"./app-Dx26qlXV.js";const o={},a={class:"inline-flex items-center gap-2 rounded-lg bg-neutral-100 px-2 py-1 text-sm text-neutral-700"};function c(e,l){return n(),r("span",a,[s(e.$slots,"default")])}const f=t(o,[["render",c]]);export{f as V};

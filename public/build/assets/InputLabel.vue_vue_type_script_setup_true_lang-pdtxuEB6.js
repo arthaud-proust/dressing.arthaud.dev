@@ -1,0 +1,1 @@
+import{d as a,c as s,t as o,q as n,a as t}from"./app-Dx26qlXV.js";const l={class:"block text-sm font-medium text-gray-700"},r={key:0},p={key:1},m=a({__name:"InputLabel",props:{value:{}},setup(_){return(e,c)=>(t(),s("label",l,[e.value?(t(),s("span",r,o(e.value),1)):(t(),s("span",p,[n(e.$slots,"default")]))]))}});export{m as _};
